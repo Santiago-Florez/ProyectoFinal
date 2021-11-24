@@ -1,4 +1,4 @@
-package com.example.proyecto;
+package co.edu.unbosque;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
