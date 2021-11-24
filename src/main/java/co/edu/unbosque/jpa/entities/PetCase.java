@@ -5,24 +5,24 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "PetCase")
-public class PetCase implements Serializable {
+public class PetCase implements Serializable{
 
     @Id
-    @Column(name = "case_id", nullable = false)
+    @Column(name = "case_id")
     private Integer caseId;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private String created_at;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "pet_id")
-    private Pet petId;
+    @JoinColumn(name = "pet_id", referencedColumnName = "pet_id", unique = true)
+    private Pet pet_id;
 
     public PetCase(String created_at, String type, String description) {
         this.created_at = created_at;
@@ -30,9 +30,14 @@ public class PetCase implements Serializable {
         this.description = description;
     }
 
-    public PetCase() {
-
+    public PetCase(Integer caseId, String created_at, String type, String description) {
+        this.caseId = caseId;
+        this.created_at = created_at;
+        this.type = type;
+        this.description = description;
     }
+
+    public PetCase() {}
 
     public Integer getCaseId() {
         return caseId;
@@ -67,10 +72,10 @@ public class PetCase implements Serializable {
     }
 
     public Pet getPetId() {
-        return petId;
+        return pet_id;
     }
 
     public void setPetId(Pet petId) {
-        this.petId = petId;
+        this.pet_id = petId;
     }
 }

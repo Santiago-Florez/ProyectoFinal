@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class OwnerImpl implements OwnerRepository{
+public class OwnerImpl implements OwnerRepository {
 
     private EntityManager entityManager;
 
@@ -15,12 +15,12 @@ public class OwnerImpl implements OwnerRepository{
     }
 
     @Override
-    public Optional<Owner> create(Owner off) {
+    public Optional<Owner> create(Owner ow) {
         try{
             entityManager.getTransaction().begin();
-            entityManager.persist(off);
+            entityManager.persist(ow);
             entityManager.getTransaction().commit();
-            return Optional.of(off);
+            return Optional.of(ow);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -33,29 +33,70 @@ public class OwnerImpl implements OwnerRepository{
     }
 
     @Override
-    public Optional<Owner> updateName(String name, String username) {
-        Owner ow = (Owner) entityManager.createQuery("UPDATE Owner ow SET ow.name = :name WHERE ow.username = :username")
-                .setParameter("name",name).getSingleResult();
+    public Optional<Owner> findByOwnerId(String ownerId) {
+        Owner ow = entityManager.createQuery("SELECT o FROM Owner o WHERE o.username = :ownerId", Owner.class)
+                .setParameter("ownerId", ownerId).getSingleResult();
         return ow != null ? Optional.of(ow) : Optional.empty();
+    }
+
+
+    @Override
+    public Optional<Owner> updateName(String name, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setName(name);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> updateEmail(String email, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setEmail(email);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Owner> updateAddress(String address, String username) {
-        Owner ow = (Owner) entityManager.createQuery("UPDATE Owner ow SET ow.address = :address WHERE ow.username = :username")
-                .setParameter("address",address).getSingleResult();
-        return ow != null ? Optional.of(ow) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setAddress(address);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Owner> updateNeighborhood(String neighborhood, String username) {
-        Owner ow = (Owner) entityManager.createQuery("UPDATE Owner ow SET ow.neighborhood = :neighborhood WHERE ow.username = :username")
-                .setParameter("neighborhood", neighborhood).getSingleResult();
-        return ow != null ? Optional.of(ow) : Optional.empty();
-    }
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setNeighborhood(neighborhood);
+            entityManager.getTransaction().commit();
 
-    @Override
-    public Optional<Owner> findByName(String name) {
-        Owner owner = entityManager.find(Owner.class,name);
-        return owner!=null ? Optional.of(owner) : Optional.empty();
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

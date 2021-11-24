@@ -7,9 +7,10 @@ import java.util.Optional;
 
 public interface OwnerRepository {
 
-    Optional<Owner> create(Owner off);
+    Optional<Owner> create(Owner ow);
 
     List<Owner> findAll();
+    Optional<Owner> findByOwnerId(String ownerId);
 
     Optional<Owner> updateName(String name, String username);
 
@@ -17,5 +18,5 @@ public interface OwnerRepository {
 
     Optional<Owner> updateNeighborhood(String neighborhood, String username);
 
-    Optional<Owner> findByName(String name);
+    Optional<Owner> updateEmail(String email, String username);
 }

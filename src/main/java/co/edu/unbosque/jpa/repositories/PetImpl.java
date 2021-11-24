@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class PetImpl implements PetRepository{
+public class PetImpl implements PetRepository {
 
     private EntityManager entityManager;
 
@@ -33,44 +33,114 @@ public class PetImpl implements PetRepository{
     }
 
     @Override
-    public Optional<Pet> updateName(String name, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.name = :name WHERE p.petId = :petId")
-                .setParameter("name", name).getSingleResult();
+    public Optional<Pet> findId(Integer id) {
+        Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.petId = :id", Pet.class)
+                .setParameter("id", id).getSingleResult();
         return pet != null ? Optional.of(pet) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Pet> updateName(String name, Integer petId) {
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setName(name);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Pet> updateSpecies(String species, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.species = :species WHERE p.petId = :petId")
-                .setParameter("species", species).getSingleResult();
-        return pet != null ? Optional.of(pet) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setSpecies(species);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Pet> updateRace(String race, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.race = :race WHERE p.petId = :petId")
-                .setParameter("race", race).getSingleResult();
-        return pet != null ? Optional.of(pet) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setRace(race);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Pet> updateSize(String size, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.size = :size WHERE p.petId = :petId")
-                .setParameter("size", size).getSingleResult();
-        return pet != null ? Optional.of(pet) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setSize(size);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Pet> updateSex(String sex, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.sex = :sex WHERE p.petId = :petId")
-                .setParameter("sex", sex).getSingleResult();
-        return pet != null ? Optional.of(pet) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setSex(sex);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Pet> updatePicture(String picture, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.picture = :picture WHERE p.petId = :petId")
-                .setParameter("picture", picture).getSingleResult();
-        return pet != null ? Optional.of(pet) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setPicture(picture);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Pet> updatePetMicrochip(String microchip, Integer petId) {
+        try{
+            entityManager.getTransaction().begin();
+            Pet pet = entityManager.find(Pet.class, petId);
+            pet.setMicroChip(microchip);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(pet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

@@ -9,8 +9,11 @@ public interface OfficialRepository {
 
     Optional<Official> create(Official off);
 
+    Optional<Official> findByOwnerId(String officialId);
+
     List<Official> findAll();
 
     Optional<Official> updateName(String name, String username);
 
+    Optional<Official> updateEmail(String email, String username);
 }

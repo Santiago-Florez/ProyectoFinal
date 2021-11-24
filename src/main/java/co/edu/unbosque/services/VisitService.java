@@ -1,76 +1,65 @@
 package co.edu.unbosque.services;
 
+import co.edu.unbosque.jpa.entities.Pet;
+import co.edu.unbosque.jpa.entities.Vet;
 import co.edu.unbosque.jpa.entities.Visit;
-import co.edu.unbosque.jpa.repositories.VisitImpl;
-import co.edu.unbosque.jpa.repositories.VisitRepository;
-import co.edu.unbosque.services.pojo.VisitPOJO;
+import co.edu.unbosque.jpa.repositories.*;
+import co.edu.unbosque.resource.pojo.VisitPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class VisitService {
 
     VisitRepository visitRepository;
-    private EntityManager entityManager;
+    VetRepository userAppRepository;
+    PetRepository petRepository;
 
-    public VisitPOJO save(Integer visitId, String createdAt, String type, String description, String vetId, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public VisitPOJO createVisit(String visitId, String createdAt, String type, String description, String vetId, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         visitRepository = new VisitImpl(entityManager);
-        Visit visit = new Visit(createdAt, type, description);
-        visitRepository.save(visit);
+        userAppRepository = new VetImpl(entityManager);
+        petRepository = new PetImpl(entityManager);
+        Optional<Pet> pet = petRepository.findId(petId);
+        Optional<Vet> userApp = userAppRepository.findByUsername(vetId);
+
+        pet.ifPresent(pet1 -> {
+            Visit visit = new Visit(visitId, createdAt, type, description);
+            visit.setPet_id(pet1);
+            pet1.addVisit(visit);
+            visitRepository.save(visit);
+        });
+        userApp.ifPresent(userApp1 -> {
+            Visit visit = new Visit(visitId, createdAt, type, description);
+            visit.setVet_id(userApp1);
+            userApp1.addVisit(visit);
+            visitRepository.save(visit);
+        });
 
         entityManager.close();
         entityManagerFactory.close();
 
-        VisitPOJO visitPOJO = new VisitPOJO(createdAt, type, description);
+        VisitPOJO visitPOJO = new VisitPOJO(visitId,createdAt, type, description);
 
         return visitPOJO;
     }
 
-    public List<VisitPOJO> findAll(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public Pet findPetId(Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        visitRepository = new VisitImpl(entityManager);
-        List<Visit> getVisits = visitRepository.findAll();
+        petRepository = new PetImpl(entityManager);
+        Pet persistedPet = petRepository.findId(petId).get();
 
         entityManager.close();
         entityManagerFactory.close();
 
-        List<VisitPOJO> visitPOJOS = new ArrayList<>();
-        for (Visit visit: getVisits){
-            visitPOJOS.add(new VisitPOJO(visit.getVistId(), visit.getCreated_at(), visit.getType(), visit.getDescription(), visit.getVetId().getName(), visit.getPetId().getPetId()));
-        }
-        return visitPOJOS;
-    }
-
-    public VisitPOJO updatemicrochip(String micro, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        visitRepository = new VisitImpl(entityManager);
-        visitRepository.updatePetMicrochip(micro,petId);
-
-        List<Visit> visits = visitRepository.findAll();
-
-        entityManager.close();
-        entityManagerFactory.close();
-
-        VisitPOJO visitPOJO = new VisitPOJO();
-
-        for (Visit visit : visits){
-            if (visit.getPetId().getPetId() == petId){
-                visitPOJO = new VisitPOJO(visit.getVistId(), visit.getCreated_at(), visit.getType(), visit.getDescription(), visit.getVetId().getName(), visit.getPetId().getPetId());
-            }
-        }
-
-        return visitPOJO;
+        return persistedPet;
     }
 }

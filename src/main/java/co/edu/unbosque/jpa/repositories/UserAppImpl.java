@@ -1,6 +1,6 @@
 package co.edu.unbosque.jpa.repositories;
 
-import co.edu.unbosque.workshop5.jpa.entities.UserApp;
+import co.edu.unbosque.jpa.entities.UserApp;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -15,12 +15,12 @@ public class UserAppImpl implements UserAppRepository{
     }
 
     @Override
-    public Optional<UserApp> save(UserApp usApp) {
+    public Optional<UserApp> save(UserApp user) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(usApp);
+            entityManager.persist(user);
             entityManager.getTransaction().commit();
-            return Optional.of(usApp);
+            return Optional.of(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

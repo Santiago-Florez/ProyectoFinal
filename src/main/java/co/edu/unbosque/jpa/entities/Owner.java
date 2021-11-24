@@ -7,15 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "Owner")
-public class Owner implements Serializable {
+@PrimaryKeyJoinColumn
+public class Owner extends UserApp implements Serializable {
 
-    @Id
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "username" )
-    private UserApp username;
-
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "person_id", unique = true, nullable = false)
+    @Column(name = "person_id", unique = true)
     private Integer person_id;
 
     @Column(name = "name")
@@ -27,31 +22,30 @@ public class Owner implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerId", cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<>();
 
-    public Owner(String name, String address, String neighborhood) {
+    public Owner() {}
+
+    public Owner(String username, String password, String email, Integer personId, String name, String address, String neighborhood) {
+        super(username, password, email, "owner");
+        this.person_id = personId;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
     }
 
-    public Owner() {
-    }
-    public UserApp getUsername() {
-        return username;
-    }
-
-    public void setUsername(UserApp username) {
-        this.username = username;
+    public void addPet(Pet pet) {
+        pets.add(pet);
+        pet.setOwner(this);
     }
 
     public Integer getPerson_id() {
         return person_id;
     }
 
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
+    public void setPerson_id(Integer personId) {
+        this.person_id = personId;
     }
 
     public String getName() {
@@ -77,14 +71,4 @@ public class Owner implements Serializable {
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
     }
-
-    public List<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
-    }
-
-
 }

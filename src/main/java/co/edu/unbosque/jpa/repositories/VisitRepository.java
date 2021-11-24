@@ -12,5 +12,5 @@ public interface VisitRepository {
 
     List<Visit> findAll();
 
-    Optional<Pet> updatePetMicrochip(String microchip, Integer petId);
+    public Optional<Pet> findPetId(Integer petId);
 }

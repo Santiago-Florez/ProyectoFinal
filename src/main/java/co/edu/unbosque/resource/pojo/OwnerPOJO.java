@@ -1,23 +1,38 @@
-package co.edu.unbosque.services.pojo;
+package co.edu.unbosque.resource.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OwnerPOJO {
 
     private String username;
+
+    private String password;
+
+    private String email;
+
     private Integer personId;
+
     private String name;
+
     private String address;
+
     private String neighborhood;
 
-    public OwnerPOJO(){}
-
-    public OwnerPOJO(String username, String name, String address, String neighborhood) {
-        this.username = username;
-        this.name = name;
-        this.address = address;
-        this.neighborhood = neighborhood;
+    public OwnerPOJO() {
     }
 
-    public OwnerPOJO(String name, String address, String neighborhood) {
+    public OwnerPOJO(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public OwnerPOJO(String username, String password, String email, Integer personId, String name, String address, String neighborhood) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.personId = personId;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
@@ -29,6 +44,22 @@ public class OwnerPOJO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getPersonId() {

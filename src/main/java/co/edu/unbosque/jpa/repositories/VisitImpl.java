@@ -1,7 +1,7 @@
 package co.edu.unbosque.jpa.repositories;
 
-import co.edu.unbosque.workshop5.jpa.entities.Pet;
-import co.edu.unbosque.workshop5.jpa.entities.Visit;
+import co.edu.unbosque.jpa.entities.Pet;
+import co.edu.unbosque.jpa.entities.Visit;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -35,8 +35,8 @@ public class VisitImpl implements VisitRepository{
     }
 
     @Override
-    public Optional<Pet> updatePetMicrochip(String microchip, Integer petId) {
-        Pet pet = (Pet) entityManager.createQuery("UPDATE Pet p SET p.microChip = :microchip WHERE p.petId = :petId")
+    public Optional<Pet> findPetId(Integer petId) {
+        Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.petId = :petId", Pet.class)
                 .setParameter("petId", petId).getSingleResult();
         return pet != null ? Optional.of(pet) : Optional.empty();
     }

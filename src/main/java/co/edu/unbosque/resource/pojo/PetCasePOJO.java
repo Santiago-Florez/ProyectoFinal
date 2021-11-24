@@ -1,5 +1,8 @@
-package co.edu.unbosque.services.pojo;
+package co.edu.unbosque.resource.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PetCasePOJO {
 
     private Integer caseId;
@@ -18,7 +21,7 @@ public class PetCasePOJO {
         this.petId = petId;
     }
 
-    public PetCasePOJO(String createdAt, String type, String description) {
+    public PetCasePOJO(Integer caseId,String createdAt, String type, String description) {
         this.createdAt = createdAt;
         this.type = type;
         this.description = description;

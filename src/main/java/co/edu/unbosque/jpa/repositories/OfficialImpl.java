@@ -33,9 +33,39 @@ public class OfficialImpl implements OfficialRepository{
     }
 
     @Override
+    public Optional<Official> findByOwnerId(String officialId) {
+        Official of = entityManager.createQuery("SELECT o FROM Official o WHERE o.username = :officialId", Official.class)
+                .setParameter("officialId", officialId).getSingleResult();
+        return of != null ? Optional.of(of) : Optional.empty();
+    }
+
+    @Override
     public Optional<Official> updateName(String name, String username) {
-        Official off = (Official) entityManager.createQuery("UPDATE Official o SET o.name = :name WHERE o.username = :username")
-                .setParameter("name", name).setParameter("username", username).getSingleResult();
-        return off != null ? Optional.of(off) : Optional.empty();
+        try{
+            entityManager.getTransaction().begin();
+            Official official = entityManager.find(Official.class, username);
+            official.setName(name);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(official);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Official> updateEmail(String email, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Official official = entityManager.find(Official.class, username);
+            official.setEmail(email);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(official);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }

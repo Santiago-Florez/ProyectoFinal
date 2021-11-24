@@ -1,13 +1,15 @@
 package co.edu.unbosque.jpa.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name="UserApp")
-public class UserApp {
+@Table(name = "UserApp")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class UserApp implements Serializable {
 
     @Id
-    @Column(name = "username",nullable = false)
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")
@@ -18,15 +20,6 @@ public class UserApp {
 
     @Column(name = "role")
     private String role;
-
-    @OneToOne(mappedBy = "userApp", cascade = CascadeType.ALL)
-    private Official official;
-
-    @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
-    private Owner owner;
-
-    @OneToOne(mappedBy = "username", cascade = CascadeType.ALL)
-    private Vet vet;
 
     public UserApp(String username, String password, String email, String role) {
         this.username = username;
@@ -69,29 +62,5 @@ public class UserApp {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Official getOfficial() {
-        return official;
-    }
-
-    public void setOfficial(Official official) {
-        this.official = official;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    public Vet getVet() {
-        return vet;
-    }
-
-    public void setVet(Vet vet) {
-        this.vet = vet;
     }
 }

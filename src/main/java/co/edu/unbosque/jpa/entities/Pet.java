@@ -7,45 +7,45 @@ import java.util.List;
 
 @Entity
 @Table(name = "Pet")
-public class Pet implements Serializable {
+public class Pet implements Serializable{
 
     @Id
-    @GeneratedValue
-    @Column(name = "pet_id", nullable = false)
+    @Column(name = "pet_id")
     private Integer petId;
 
-    @Column(name = "microchip", nullable = false, unique = true)
+    @Column(name = "microchip", unique = true)
     private String microChip;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "species", nullable = false)
+    @Column(name = "species")
     private String species;
 
-    @Column(name = "race", nullable = false)
+    @Column(name = "race")
     private String race;
 
-    @Column(name = "size", nullable = false)
+    @Column(name = "size")
     private String size;
 
-    @Column(name = "sex", nullable = false)
+    @Column(name = "sex")
     private String sex;
 
-    @Column(name = "picture" , nullable = false)
+    @Column(name = "picture")
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "person_id",referencedColumnName = "person_id")
-    private Owner owner;
+    @JoinColumn(name = "owner_id", referencedColumnName = "person_id", unique = true)
+    private Owner ownerId;
 
-    @OneToMany(mappedBy = "petId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pet_id", fetch = FetchType.EAGER)
     private List<Visit> visit = new ArrayList<>();
 
-    @OneToMany(mappedBy = "petId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pet_id", cascade = CascadeType.MERGE)
     private List<PetCase> petCase = new ArrayList<>();
 
-    public Pet(String microChip, String name, String species, String race, String size, String sex, String picture) {
+    public Pet(Integer petId, String microChip, String name, String species, String race, String size, String sex, String picture) {
+        this.petId = petId;
         this.microChip = microChip;
         this.name = name;
         this.species = species;
@@ -57,6 +57,16 @@ public class Pet implements Serializable {
 
     public Pet() {
 
+    }
+
+    public void addPetCase(PetCase petcases) {
+        petCase.add(petcases);
+        petcases.setPetId(this);
+    }
+
+    public void addVisit(Visit visits) {
+        visit.add(visits);
+        visits.setPet_id(this);
     }
 
     public Integer getPetId() {
@@ -124,11 +134,11 @@ public class Pet implements Serializable {
     }
 
     public Owner getOwner() {
-        return owner;
+        return ownerId;
     }
 
     public void setOwner(Owner owner) {
-        this.owner = owner;
+        this.ownerId = owner;
     }
 
     public List<Visit> getVisit() {

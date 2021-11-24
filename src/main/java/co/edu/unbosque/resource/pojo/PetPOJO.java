@@ -1,5 +1,8 @@
-package co.edu.unbosque.services.pojo;
+package co.edu.unbosque.resource.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PetPOJO {
 
     private Integer petId;
@@ -13,25 +16,6 @@ public class PetPOJO {
     private Integer ownerId;
 
     public PetPOJO(){}
-
-    public PetPOJO(String microchip, String name, String species, String race, String size, String sex, String picture) {
-        this.microchip = microchip;
-        this.name = name;
-        this.species = species;
-        this.race = race;
-        this.size = size;
-        this.sex = sex;
-        this.picture = picture;
-    }
-
-    public PetPOJO(String name, String species, String race, String size, String sex, String picture) {
-        this.name = name;
-        this.species = species;
-        this.race = race;
-        this.size = size;
-        this.sex = sex;
-        this.picture = picture;
-    }
 
     public PetPOJO(Integer petId, String microchip, String name, String species, String race, String size, String sex, String picture, Integer ownerId) {
         this.petId = petId;

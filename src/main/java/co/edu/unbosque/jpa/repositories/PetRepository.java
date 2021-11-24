@@ -11,6 +11,10 @@ public interface PetRepository {
 
     List<Pet> findAll();
 
+    Optional<Pet> updatePetMicrochip(String microchip, Integer petId);
+
+    Optional<Pet> findId(Integer id);
+
     Optional<Pet> updateName(String name, Integer petId);
 
     Optional<Pet> updateSpecies(String species, Integer petId);

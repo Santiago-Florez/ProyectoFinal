@@ -3,120 +3,140 @@ package co.edu.unbosque.services;
 import co.edu.unbosque.jpa.entities.Owner;
 import co.edu.unbosque.jpa.repositories.OwnerImpl;
 import co.edu.unbosque.jpa.repositories.OwnerRepository;
-import co.edu.unbosque.services.pojo.OwnerPOJO;
+import co.edu.unbosque.resource.pojo.OwnerPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class OwnerService {
 
     OwnerRepository ownerRepository;
 
-    public OwnerPOJO save(String name, String address, String neighborhood){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public Optional<OwnerPOJO> createOwner(OwnerPOJO ownerPOJO){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
-        Owner owner = new Owner(name, address, neighborhood);
-        ownerRepository.create(owner);
+        Owner owner = new Owner(ownerPOJO.getUsername(), ownerPOJO.getPassword(), ownerPOJO.getEmail(),
+                ownerPOJO.getPersonId(), ownerPOJO.getName(), ownerPOJO.getAddress(), ownerPOJO.getNeighborhood());
+        Optional<Owner> persistedOwner = ownerRepository.create(owner);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        OwnerPOJO ownerPOJO = new OwnerPOJO(name, address, neighborhood);
+        if (persistedOwner.isPresent()) {
+            return Optional.of(new OwnerPOJO(persistedOwner.get().getUsername(),
+                    persistedOwner.get().getPassword(),
+                    persistedOwner.get().getEmail(),
+                    persistedOwner.get().getPerson_id(),
+                    persistedOwner.get().getName(),
+                    persistedOwner.get().getAddress(),
+                    persistedOwner.get().getNeighborhood()));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    public Owner findUsername(String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerImpl(entityManager);
+        Owner persistedOwner = ownerRepository.findByOwnerId(username).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedOwner;
+    }
+
+    public OwnerPOJO updateName(String newName, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerImpl(entityManager);
+        ownerRepository.updateName(newName, username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Owner owner = findUsername(username);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPerson_id(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
 
         return ownerPOJO;
     }
 
-    public List<OwnerPOJO> findAll(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public OwnerPOJO updateEmail(String newEmail, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
-        List<Owner> getOwners = ownerRepository.findAll();
+        ownerRepository.updateEmail(newEmail, username);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        List<OwnerPOJO> ownerPOJOS = new ArrayList<>();
-        for (Owner owner: getOwners){
-            ownerPOJOS.add(new OwnerPOJO(owner.getUsername().getUsername(), owner.getName(), owner.getAddress(), owner.getNeighborhood()));
-        }
-
-        return ownerPOJOS;
-    }
-
-    public OwnerPOJO updateName(String name, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        ownerRepository = new OwnerImpl(entityManager);
-        ownerRepository.updateName(name, username);
-
-        List<Owner> owners = ownerRepository.findAll();
-
-        entityManager.close();
-        entityManagerFactory.close();
-
-        OwnerPOJO ownerPOJO = new OwnerPOJO();
-
-        for (Owner owner:owners){
-            if(owner.getUsername().equals(username)){
-                ownerPOJO = new OwnerPOJO(owner.getName(), owner.getAddress(), owner.getNeighborhood());
-            }
-        }
+        Owner owner = findUsername(username);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPerson_id(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
 
         return ownerPOJO;
     }
 
-    public OwnerPOJO updateAddress(String address, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public OwnerPOJO updateAddress(String newAddress, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
-        ownerRepository.updateAddress(address, username);
-
-        List<Owner> owners = ownerRepository.findAll();
+        ownerRepository.updateAddress(newAddress, username);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        OwnerPOJO ownerPOJO = new OwnerPOJO();
-
-        for (Owner owner:owners){
-            if(owner.getUsername().equals(username)){
-                ownerPOJO = new OwnerPOJO(owner.getName(), owner.getAddress(), owner.getNeighborhood());
-            }
-        }
-
+        Owner owner = findUsername(username);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPerson_id(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
         return ownerPOJO;
     }
 
-    public OwnerPOJO updateneighborhood(String neighborhood, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public OwnerPOJO updateNeighborhood(String newNeighbohood, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
-        ownerRepository.updateNeighborhood(neighborhood, username);
-
-        List<Owner> owners = ownerRepository.findAll();
+        ownerRepository.updateNeighborhood(newNeighbohood, username);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        OwnerPOJO ownerPOJO = new OwnerPOJO();
-
-        for (Owner owner:owners){
-            if(owner.getUsername().equals(username)){
-                ownerPOJO = new OwnerPOJO(owner.getName(), owner.getAddress(), owner.getNeighborhood());
-            }
-        }
-
+        Owner owner = findUsername(username);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPerson_id(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
         return ownerPOJO;
     }
 }

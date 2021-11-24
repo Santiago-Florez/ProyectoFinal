@@ -1,8 +1,11 @@
-package co.edu.unbosque.services.pojo;
+package co.edu.unbosque.resource.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class VisitPOJO {
 
-    private Integer visitId;
+    private String visitId;
     private String createdAt;
     private String type;
     private String description;
@@ -11,7 +14,7 @@ public class VisitPOJO {
 
     public VisitPOJO(){}
 
-    public VisitPOJO(Integer visitId, String createdAt, String type,String description, String vetId, Integer petId) {
+    public VisitPOJO(String visitId, String createdAt, String type,String description, String vetId, Integer petId) {
         this.visitId = visitId;
         this.createdAt = createdAt;
         this.type = type;
@@ -20,17 +23,18 @@ public class VisitPOJO {
         this.petId = petId;
     }
 
-    public VisitPOJO(String createdAt, String type, String description) {
+    public VisitPOJO(String visitId,String createdAt, String type, String description) {
+        this.visitId = visitId;
         this.createdAt = createdAt;
         this.type = type;
         this.description = description;
     }
 
-    public Integer getVisitId() {
+    public String getVisitId() {
         return visitId;
     }
 
-    public void setVisitId(Integer visitId) {
+    public void setVisitId(String visitId) {
         this.visitId = visitId;
     }
 
@@ -64,5 +68,13 @@ public class VisitPOJO {
 
     public void setPetId(Integer petId) {
         this.petId = petId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

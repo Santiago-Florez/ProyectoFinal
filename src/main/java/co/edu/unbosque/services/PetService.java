@@ -1,190 +1,182 @@
 package co.edu.unbosque.services;
 
+import co.edu.unbosque.jpa.entities.Owner;
 import co.edu.unbosque.jpa.entities.Pet;
+import co.edu.unbosque.jpa.repositories.OwnerImpl;
+import co.edu.unbosque.jpa.repositories.OwnerRepository;
 import co.edu.unbosque.jpa.repositories.PetImpl;
 import co.edu.unbosque.jpa.repositories.PetRepository;
-import co.edu.unbosque.services.pojo.PetPOJO;
+import co.edu.unbosque.resource.pojo.PetPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class PetService {
 
     PetRepository petRepository;
+    OwnerRepository ownerRepository;
 
-    public PetPOJO save(String microchip, String name, String species, String race, String size, String sex, String picture){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO createdPet(Integer petId, String microchip, String name, String species, String race, String size, String sex, String picture, Integer ownerId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        Pet pet = new Pet(microchip, name, species, race, size, sex, picture);
-        petRepository.save(pet);
+        ownerRepository = new OwnerImpl(entityManager);
+        Optional<Owner> owner = Optional.of(ownerRepository.findAll().get(ownerId-1));
+        owner.ifPresent(o->{
+            o.addPet(new Pet(petId, microchip, name,species, race,size,sex, picture));
+            ownerRepository.create(o);
+        });
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO(microchip, name, species, race, size, sex, picture);
+        PetPOJO petPOJO = new PetPOJO(petId,microchip,name,species,race,size,sex,picture,ownerId);
+        return petPOJO;
+
+    }
+
+    public Pet findPetId(Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        petRepository = new PetImpl(entityManager);
+        Pet persistedPet = petRepository.findId(petId).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedPet;
+    }
+
+    public PetPOJO updateName(String newName, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        petRepository = new PetImpl(entityManager);
+        petRepository.updateName(newName, petId);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public List<PetPOJO> findAll(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updateSpecies(String newSpecies, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        List<Pet> getPets = petRepository.findAll();
+        petRepository.updateSpecies(newSpecies, petId);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        List<PetPOJO> petPOJOS = new ArrayList<>();
-        for (Pet pet : getPets){
-            petPOJOS.add(new PetPOJO(pet.getPetId(),pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), pet.getOwner().getPerson_id()));
-        }
-
-        return petPOJOS;
-    }
-
-    public PetPOJO updateNames(String name, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        petRepository = new PetImpl(entityManager);
-        petRepository.updateName(name, petId);
-
-        List<Pet> pets = petRepository.findAll();
-
-        entityManager.close();
-        entityManagerFactory.close();
-
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public PetPOJO updateSpecie(String species, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updateRace(String newRace, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        petRepository.updateSpecies(species, petId);
-
-        List<Pet> pets = petRepository.findAll();
+        petRepository.updateRace(newRace, petId);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public PetPOJO updateRaces(String race, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updateSize(String newSize, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        petRepository.updateRace(race, petId);
-
-        List<Pet> pets = petRepository.findAll();
+        petRepository.updateSize(newSize, petId);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public PetPOJO updateSizes(String size, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updateSex(String newSex, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        petRepository.updateSize(size, petId);
-
-        List<Pet> pets = petRepository.findAll();
+        petRepository.updateSex(newSex, petId);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public PetPOJO updateSexs(String sex, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updatePicture(String newPicture, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        petRepository.updateSex(sex, petId);
+        petRepository.updatePicture(newPicture, petId);
 
-        List<Pet> pets = petRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
 
-    public PetPOJO updatePictures(String picture, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("workshop5");
+    public PetPOJO updateMicrochip(String newMicrochip, Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
-        petRepository.updatePicture(picture, petId);
+        petRepository.updatePetMicrochip(newMicrochip, petId);
 
-        List<Pet> pets = petRepository.findAll();
 
         entityManager.close();
         entityManagerFactory.close();
 
-        PetPOJO petPOJO = new PetPOJO();
-
-        for (Pet pet : pets){
-            if (pet.getPetId().equals(petId)){
-                petPOJO = new PetPOJO(pet.getMicroChip(), pet.getName(), pet.getSpecies(), pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture());
-            }
-        }
+        Pet pet = findPetId(petId);
+        PetPOJO petPOJO = new PetPOJO(pet.getPetId(),
+                pet.getMicroChip(), pet.getName(), pet.getSpecies(),
+                pet.getRace(), pet.getSize(), pet.getSex(), pet.getPicture(), petId);
 
         return petPOJO;
     }
