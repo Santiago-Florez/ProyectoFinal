@@ -16,41 +16,41 @@
 
         <form class="needs-validation" id="formulario" novalidate>
 
-            <label for="petId">Id mascota:</label>
-            <input class="controls" type="number" name="petId" id="petId" placeholder="Ingrese el Id" required/>
+            <label for="petId-Owner">Id mascota:</label>
+            <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
 
-            <label for="fecha">Fecha de registro:</label>
-            <input class="controls" type="date" name="createdAt" id="fecha" placeholder="Ingrese la Fecha de Registro" required/>
+            <label for="createdAt">Fecha de registro:</label>
+            <input class="controls" type="date" name="createdAt" id="createdAt" placeholder="Ingrese la Fecha de Registro" required/>
 
-            <label for="microchip">Microchip:</label>
-            <input class="controls" type="number" name="microchip" id="microchip" placeholder="Ingrese el Microchip"/>
+            <label for="microchipPet-Owner">Microchip:</label>
+            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
 
-            <label for="petName">Nombre de la mascota:</label>
-            <input class="controls" type="text" name="petName" id="petName" placeholder="Ingrese el nombre de la mascota" required/>
+            <label for="petName-Owner">Nombre de la mascota:</label>
+            <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
 
-            <label for="imgMascota">Imagen de la mascota:</label>
-            <input class="controls" type="file" name="imgMascota" id="imgMascota" placeholder="Ingrese la imagen de la mascota" required/>
+            <label for="imgMascota-Owner">Imagen de la mascota:</label>
+            <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" required/>
 
-            <label for="race">Raza:</label>
-            <select id="race" required name="race">
+            <label for="racePet-Owner">Raza:</label>
+            <select id="racePet-Owner" required name="racePet-Owner">
                 <option></option>
             </select>
-            <label for="especie1">Especie:</label>
-            <select id="especie1" required>
+            <label for="especie1Pet-Owner">Especie:</label>
+            <select id="especie1Pet-Owner" required>
                 <option></option>
                 <option>Perro</option>
                 <option>Gato</option>
             </select>
 
-            <label for="sex">Sexo:</label>
-            <select id="sex" required>
+            <label for="sexPet-Owner">Sexo:</label>
+            <select id="sexPet-Owner" required>
                 <option></option>
                 <option>Macho</option>
                 <option>Hembra</option>
             </select>
 
-            <label for="tamaño">Tamaño:</label>
-            <select id="tamaño" required>
+            <label for="tamañoPet-Owner">Tamaño:</label>
+            <select id="tamañoPet-Owner" required>
                 <option></option>
                 <option>Miniatura</option>
                 <option>Pequeño</option>
@@ -60,11 +60,12 @@
 
             <br>
 
-            <label for="ownerId">Id del Propietario:</label>
-            <input class="controls" type="text" name="ownerId" id="ownerId" placeholder="Ingrese el id del propietario" required/>
+            <label for="ownerId-Owner">Id del Propietario:</label>
+            <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
             <input id="petsave-button"  type="button"  class="boton" value="Registrar"/>
-            <input id="save-button"  type="button"  class="boton" value="Mostrar lista"/>
+            <input id="show-button"  type="button"  class="boton" value="Mostrar lista"/>
         </form>
     </section>
+    <script src="./js/scriptOwner.js"></script>
 </body>
 </html>
