@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="css/style.css" >
 
-    <title>Ciudadanos de 4 patas</title>
+    <title>Inicio Sesión</title>
 </head>
 <body>
 <section class="form-register">
     <h4>Bienvenido al programa de ciudadanos de 4 patas</h4>
-    <h5>Este es el formulario para registrar un nuevo usuario o inicar sesión</h5>
+    <h5>Este es el formulario para iniciar sesión</h5>
 
     <form class="needs-validation" id="formulario" novalidate>
 
@@ -19,27 +19,22 @@
         <input class="controls" type="text" name="username" id="nombreProp" placeholder="Ingrese el usuario" required/>
 
         <label>Contraseña:</label>
-        <input class="controls" type="password" name="password" id="nombreMas" placeholder="Ingrese la contraseña" required/>
+        <input class="controls" type="password" name="password" id="password" placeholder="Ingrese la contraseña" required/>
 
-        <label>Email:</label>
-        <input class="controls" type="text" name="email" id="nombreMas" placeholder="Ingrese el email" required/>
+        <input id="registrar-button"  type="button"  class="boton" value="Registrar Nuevo Usuario"/>
 
-        <label>Role:</label>
-        <input class="controls" type="text" name="role" id="nombreMas" placeholder="Ingrese el rol" required/>
-
-        <input id="registrar-button"  type="button"  class="boton" value="Registrar nuevo usuario"/>
         <select id="roleReg">
             <option>Rol</option>
             <option>Owner</option>
             <option>Vet</option>
         </select>
 
-        <input id="inicia-button"  type="button"  class="boton" value="Iniciar sesión"/>
+        <input id="inicia-button"  type="button"  class="boton" value="Iniciar Sesión"/>
 
     </form>
 
 
 </section>
-<script src="./js/main.js"></script>
+<script src="./js/scripts.js"></script>
 </body>
 </html>>

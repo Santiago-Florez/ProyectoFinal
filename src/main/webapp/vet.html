@@ -3,9 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="css/style.css" >
 
-    <title>Ciudadanos de 4 patas</title>
+    <title>Crear Visita Veterinaria</title>
 </head>
 <body>
 <section class="form-register">
@@ -13,69 +13,30 @@
 
     <form class="needs-validation" id="formulario" novalidate>
 
-        <label >Nombre del la veterinaria:</label>
-        <input class="controls" type="text" name="nombreVet" id="nombreProp" placeholder="Ingrese el Nombre de la veterinaria" required/>
-
         <label >Id de la visita:</label>
-        <input class="controls" type="number" name="visitId" id="nombreProp" placeholder="Ingrese la id de la visita" required/>
+        <input class="controls" type="number" name="visitId" id="idVisit" placeholder="Ingrese la id de la visita" required/>
 
         <label >Fecha de registro:</label>
-        <input class="controls" type="date" name="createdAt" id="fecha" placeholder="Ingrese la Fecha de Registro" required/>
+        <input class="controls" type="date" name="createdAt" id="fechaVisit" placeholder="Ingrese la Fecha de Registro" required/>
 
-        <label >Dirección:</label>
-        <input class="controls" type="text" name="dirección" id="microchip" placeholder="Ingrese la dirección" required/>
+        <label >Id de la Veterinaria:</label>
+        <input class="controls" type="text" name="idVet-Visit" id="idVet-Visit" placeholder="Ingrese el id de la Veterinaria" required/>
 
         <label >Id de la mascota:</label>
-        <input class="controls" type="text" name="petId" id="microchip" placeholder="Ingrese el id de la mascota" required/>
+        <input class="controls" type="text" name="IdPet-Visit" id="IdPet-Visit" placeholder="Ingrese el id de la mascota" required/>
 
         <label >Tipo de visita:</label>
-        <input class="controls" type="number" name="microchip" id="microchip" placeholder="Ingrese el Microchip"/>
+        <input class="controls" type="number" name="microchip" id="typeVisitVet" placeholder="Ingrese el Microchip"/>
 
         <label >Descripción de la visita</label>
-        <textarea class="controls" name="imgMascota" id="microchip" placeholder="Ingrese la imagen de la mascota" required></textarea>
-
-        <label >Edad de la mascota:</label>
-        <input class="controls" type="number" name="edad" id="edad" placeholder="Ingrese la edad de la Mascota" required/>
-
-        <label >especie:</label>
-        <select id="especie1" required>
-            <option></option>
-            <option>Perro</option>
-            <option>Gato</option>
-        </select>
-
-        <label >Raza:</label>
-        <select id="raza" disabled="disabled" required>
-            <option></option>
-        </select>
-        <select id="catraza" disabled="disabled" required>
-            <option></option>
-        </select>
-        <label >Sexo:</label>
-        <select id="sex" required>
-            <option></option>
-            <option>Macho</option>
-            <option>Hembra</option>
-        </select>
-        <label >Tamaño:</label>
-        <select id="tamaño" required>
-            <option></option>
-            <option>Miniatura</option>
-            <option>Pequeño</option>
-            <option>Mediano</option>
-            <option>Grande</option>
-        </select>
+        <textarea class="controls" name="imgMascota" id="description" placeholder="Ingrese la imagen de la mascota" required></textarea>
 
         <br>
 
         <input id="petsave-button"  type="button"  class="botons" value="Registrar"/>
         <input id="save-button"  type="button"  class="botons" value="Mostrar lista"/>
-
-
     </form>
-
-
 </section>
-<script src="./js/main.js"></script>
+<script src="./js/scripts.js.js"></script>
 </body>
 </html>

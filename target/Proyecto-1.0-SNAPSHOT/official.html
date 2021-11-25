@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" >
+    <title>Funcionario</title>
+</head>
+<body>
+    <header>
+        <h1>Ciudadanos de 4 Patas</h1>
+        <h3>Funcionario</h3>
+    </header>
+
+    <section class="form-filter">
+
+        <form class="needs-validation" id="formulario" novalidate>
+
+            <label for="neighborhood-user">Filtrar por localidad</label>
+            <select name="neighborhood-user" id="neighborhood-user">
+                <option value=""></option>
+                <option value="A. Nariño">A. NARINO</option>
+                <option value="B. UNIDOS">B. UNIDOS</option>
+                <option value="BOSA">BOSA</option>
+                <option value="C. BOLIVAR">C. BOLIVAR</option>
+                <option value="CHAPINERO">CHAPINERO</option>
+                <option value="ENGATIVA">ENGATIVA</option>
+                <option value="FONTIBON">FONTIBON</option>
+                <option value="KENNEDY">KENNEDY</option>
+                <option value="LA CANDELARIA">LA CANDELARIA</option>
+                <option value="LOS MARTIRES">LOS MARTIRES</option>
+                <option value="P. ARANDA">P. ARANDA</option>
+                <option value="R. CRISTOBAL">R. URIBE</option>
+                <option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+                <option value="SANTA FE">SANTA FE</option>
+                <option value="SUBA">SUBA</option>
+                <option value="SUMAPAZ">SUMAPAZ</option>
+                <option value="TEUSAQUILLO">TEUSAQUILLO</option>
+                <option value="TUNJUELITO">TUNJUELITO</option>
+                <option value="USAQUEN">USAQUEN</option>
+                <option value="USME">USME</option>
+            </select>
+            <br>
+            <label for="species-pet">Filtra por Especie de la Mascota</label>
+            <select name="species-pet" id="species-pet">
+                <option></option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+            </select>
+            <br>
+            <label for="microchip-pet">Filtra por Microchip</label>
+            <select name="microchip-pet" id="microchip-pet">
+                <option value=""></option>
+                <option value="Si">SI</option>
+                <option value="No">NO</option>
+            </select>
+            <br>
+            <label for="esterilizacion-pet">Filtra por Esterilizacion</label>
+            <select name="esterilizacion-pet" id="esterilizacion-pet">
+                <option></option>
+                <option value="Si">SI</option>
+                <option value="No">NO</option>
+            </select>
+            <br>
+            <label for="caso-pet">Filtra por Tipo de Caso de la Mascota</label>
+            <select name="caso-pet" id="caso-pet">
+                <option value=""></option>
+                <option value="perdida">PERDIDA</option>
+                <option value="robada">ROBADA</option>
+                <option value="muerta">MUERTA</option>
+            </select>
+            <br>
+            <label for="nombre-vet">Filtra por Nombre Veterinaria</label>
+            <input class="controls" type="text" name="nombre-vet" id="nombre-vet" placeholder="Ingrese el Nombre de la Veterinaria">
+            <br>
+            <label for="visitCase-vet">Filtra por Tipo de Caso de la Mascota</label>
+            <select name="caso-pet" id="visitCase-vet">
+                <option value=""></option>
+                <option value="Esterilizacion">Esterilizacion</option>
+                <option value="implantarMicro">Implantar Microchip</option>
+                <option value="Vacunacion">Vacunacion</option>
+                <option value="Desparacitacion">Desparacitacion</option>
+                <option value="Urgencia">Urgencia</option>
+                <option value="Control">Control</option>
+            </select>
+            <br>
+            <input id="save-button"  type="button"  class="boton" value="Mostrar lista"/>
+        </form>
+    </section>
+</body>
+</html>
