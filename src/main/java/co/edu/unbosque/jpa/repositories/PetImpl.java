@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PetImpl implements PetRepository {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public PetImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -36,6 +36,13 @@ public class PetImpl implements PetRepository {
     public Optional<Pet> findId(Integer id) {
         Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.petId = :id", Pet.class)
                 .setParameter("id", id).getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
+    }
+
+    @Override
+    public Optional<Pet> findOwnerId(Integer ownerId) {
+        Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.ownerId.personId = :ownerId", Pet.class)
+                .setParameter("ownerId", ownerId).getSingleResult();
         return pet != null ? Optional.of(pet) : Optional.empty();
     }
 

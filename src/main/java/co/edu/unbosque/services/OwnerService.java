@@ -32,7 +32,7 @@ public class OwnerService {
             return Optional.of(new OwnerPOJO(persistedOwner.get().getUsername(),
                     persistedOwner.get().getPassword(),
                     persistedOwner.get().getEmail(),
-                    persistedOwner.get().getPerson_id(),
+                    persistedOwner.get().getPersonId(),
                     persistedOwner.get().getName(),
                     persistedOwner.get().getAddress(),
                     persistedOwner.get().getNeighborhood()));
@@ -68,7 +68,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -90,7 +90,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -112,7 +112,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -133,7 +133,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());

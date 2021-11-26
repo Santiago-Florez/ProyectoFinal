@@ -29,8 +29,10 @@ document.getElementById("registrarOwner").onclick = function(){
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            window.location.reload;
+            alert("¡Propietario Creado Exitosamente!")
+            var path = window.location.pathname.split("/");
+            var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "index.html";
+            window.location.href = redirect;
         })
         var elementP = document.getElementById("MensajeError");
         elementP.innerHTML = "";

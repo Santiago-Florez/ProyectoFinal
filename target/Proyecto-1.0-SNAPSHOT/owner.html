@@ -10,30 +10,26 @@
 <body>
 
 
-    <section class="form-register">
+    <section class="form-register" id="section">
         <h1>Ciudadanos de 4 Patas</h1>
         <h3>Propietario</h3>
         <form class="needs-validation" id="formulario" novalidate>
 
             <label for="petId-Owner">Id mascota:</label>
             <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
-
-            <label for="createdAt">Fecha de registro:</label>
-            <input class="controls" type="date" name="createdAt" id="createdAt" placeholder="Ingrese la Fecha de Registro" required/>
-
+            <br>
             <label for="microchipPet-Owner">Microchip:</label>
             <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
-
+            <br>
             <label for="petName-Owner">Nombre de la mascota:</label>
             <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
-
+            <br>
             <label for="imgMascota-Owner">Imagen de la mascota:</label>
             <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" required/>
-
+            <br>
             <label for="racePet-Owner">Raza:</label>
-            <select id="racePet-Owner" required name="racePet-Owner">
-                <option></option>
-            </select>
+            <input type="text" class="controls" id="racePet-Owner" required name="racePet-Owner"/>
+            <br>
             <label for="especie1Pet-Owner">Especie:</label>
             <select id="especie1Pet-Owner" required>
                 <option></option>
@@ -58,13 +54,19 @@
             </select>
             <br>
             <br>
-
             <label for="ownerId-Owner">Id del Propietario:</label>
             <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
             <input id="petsave-button"  type="button"  class="boton" value="Registrar"/>
-            <input id="show-button"  type="button"  class="boton" value="Mostrar lista"/>
+            <input id="show-button"  type="button"  class="boton" value="Ver Mi(s) Mascota(s)"/>
+            <input id="back-button"  type="button"  class="boton" value="Volver al Inicio"/>
+            <br>
+            <p style="color: tomato;" id="MensajeError"></p>
         </form>
+
+        <table id="table">
+
+        </table>
     </section>
-    <script src="./js/scriptOwner.js"></script>
+    <script src="./js/Owner.js"></script>
 </body>
 </html>

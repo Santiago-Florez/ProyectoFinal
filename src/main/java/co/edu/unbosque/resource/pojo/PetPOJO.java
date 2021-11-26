@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PetPOJO {
 
-    private Integer petId;
+    private Integer pet_id;
     private String microchip;
     private String name;
     private String species;
@@ -17,8 +17,8 @@ public class PetPOJO {
 
     public PetPOJO(){}
 
-    public PetPOJO(Integer petId, String microchip, String name, String species, String race, String size, String sex, String picture, Integer ownerId) {
-        this.petId = petId;
+    public PetPOJO(Integer pet_id, String microchip, String name, String species, String race, String size, String sex, String picture, Integer ownerId) {
+        this.pet_id = pet_id;
         this.microchip = microchip;
         this.name = name;
         this.species = species;
@@ -29,12 +29,12 @@ public class PetPOJO {
         this.ownerId = ownerId;
     }
 
-    public Integer getPetId() {
-        return petId;
+    public Integer getPet_id() {
+        return pet_id;
     }
 
-    public void setPetId(Integer petId) {
-        this.petId = petId;
+    public void setPet_id(Integer pet_id) {
+        this.pet_id = pet_id;
     }
 
     public Integer getOwnerId() {

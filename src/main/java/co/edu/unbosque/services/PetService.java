@@ -53,6 +53,19 @@ public class PetService {
         return persistedPet;
     }
 
+    public Pet findOwnerId(Integer ownerId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        petRepository = new PetImpl(entityManager);
+        Pet persistedPet = petRepository.findOwnerId(ownerId).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return persistedPet;
+    }
+
     public PetPOJO updateName(String newName, Integer petId){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

@@ -11,7 +11,7 @@ import java.util.List;
 public class Owner extends UserApp implements Serializable {
 
     @Column(name = "person_id", unique = true)
-    private Integer person_id;
+    private Integer personId;
 
     @Column(name = "name")
     private String name;
@@ -29,7 +29,7 @@ public class Owner extends UserApp implements Serializable {
 
     public Owner(String username, String password, String email, Integer personId, String name, String address, String neighborhood) {
         super(username, password, email, "owner");
-        this.person_id = personId;
+        this.personId = personId;
         this.name = name;
         this.address = address;
         this.neighborhood = neighborhood;
@@ -40,12 +40,12 @@ public class Owner extends UserApp implements Serializable {
         pet.setOwner(this);
     }
 
-    public Integer getPerson_id() {
-        return person_id;
+    public Integer getPersonId() {
+        return personId;
     }
 
-    public void setPerson_id(Integer personId) {
-        this.person_id = personId;
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public String getName() {
