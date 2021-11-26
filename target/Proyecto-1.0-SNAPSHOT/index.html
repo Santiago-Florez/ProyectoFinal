@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css" >
+    <link rel="stylesheet" href="./css/style.css" >
 
     <title>Inicio Sesión</title>
 </head>
@@ -16,7 +16,7 @@
     <form class="needs-validation" id="formulario" novalidate>
 
         <label>Usuario:</label>
-        <input class="controls" type="text" name="username" id="nombreProp" placeholder="Ingrese el usuario" required/>
+        <input class="controls" type="text" name="username" id="username" placeholder="Ingrese el usuario" required/>
 
         <label>Contraseña:</label>
         <input class="controls" type="password" name="password" id="password" placeholder="Ingrese la contraseña" required/>
@@ -24,17 +24,16 @@
         <input id="registrar-button"  type="button"  class="boton" value="Registrar Nuevo Usuario"/>
 
         <select id="roleReg">
-            <option>Rol</option>
-            <option>Owner</option>
-            <option>Vet</option>
+            <option value="Rol">Rol</option>
+            <option value="Owner">Owner</option>
+            <option value="Vet">Vet</option>
         </select>
 
         <input id="inicia-button"  type="button"  class="boton" value="Iniciar Sesión"/>
-
+        <p style="color: tomato;" id="MensajeError"></p>
     </form>
 
-
 </section>
-<script src="./js/scripts.js"></script>
+<script src="./js/scriptsInicioSesion.js"></script>
 </body>
 </html>>

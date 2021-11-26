@@ -1,105 +1,98 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 body {
-    background-image: url('img/fondo.jpg');
+  background-image: url("img/fondo.jpg");
 }
 
 .form-filter {
-    width: 1000px;
-    background: #24303c;
-    padding: 30px;
-    margin: auto;
-    margin-top: 50px;
-    border-radius: 4px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 13px 37px #000;
+  width: 1000px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 4px;
+  font-family: "calibri";
+  color: white;
+  box-shadow: 7px 13px 37px #000;
 }
 
 .form-register {
-     width: 1000px;
-     background: #24303c;
-     padding: 30px;
-     margin: auto;
-     margin-top: 50px;
-     border-radius: 4px;
-     font-family: 'calibri';
-     color: white;
-     box-shadow: 7px 13px 37px #000;
- }
-
-
-
-.tabla {
-    width: 1000px;
-    background: #24303c;
-    padding: 30px;
-    margin: auto;
-    margin-top: 50px;
-    border-radius: 4px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 13px 37px #000;
+  width: 1000px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 4px;
+  font-family: "calibri";
+  color: white;
+  box-shadow: 7px 13px 37px #000;
 }
 
+.tabla {
+  width: 1000px;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 4px;
+  font-family: "calibri";
+  color: white;
+  box-shadow: 7px 13px 37px #000;
+}
 
-a{
-    width: 100%;
-    background: #1f53c5;
-    border: none;
-    padding: 12px;
-    color: white;
-    margin: 16px;
-    font-size: 16px;
+a {
+  width: 100%;
+  background: #1f53c5;
+  border: none;
+  padding: 12px;
+  color: white;
+  margin: 16px;
+  font-size: 16px;
 }
 
 .form-register h4 {
-    font-size: 32px;
-    margin-bottom: 20px;
-
+  font-size: 32px;
+  margin-bottom: 20px;
 }
-.form-register h5{
-    font-size: 23px;
-    margin-bottom: 50px;
+.form-register h5 {
+  font-size: 23px;
+  margin-bottom: 50px;
 }
 
-.especie{
-
+.especie {
 }
 
 .controls {
-    width: 100%;
-    margin-left: 1px;
-    background: #24303c;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid#1f53c5;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: white;
+  width: 100%;
+  margin-left: 1px;
+  background: #24303c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  border: 1px solid#1f53c5;
+  font-family: "calibri";
+  font-size: 18px;
+  color: white;
 }
 
 .botons {
-    width: 300px;
-    background: #1f53c5;
-    border: 30px;
-    padding: 12px;
-    color: white;
-    margin-left: 300px;
-    font-size: 16px;
-
+  width: 300px;
+  background: #1f53c5;
+  border: 30px;
+  padding: 12px;
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
 }
 
 .boton {
-    width: 300px;
-    background: #1f53c5;
-    border: 30px;
-    padding: 12px;
-    color: white;
-    margin: 30px;
-    font-size: 16px;
-
+  width: 300px;
+  background: #1f53c5;
+  border: 30px;
+  padding: 12px;
+  color: white;
+  font-size: 16px;
 }
