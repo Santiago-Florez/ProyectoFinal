@@ -35,6 +35,4 @@ document.getElementById("registrarOwner").onclick = function(){
         var elementP = document.getElementById("MensajeError");
         elementP.innerHTML = "";
     }
-
-    
 }

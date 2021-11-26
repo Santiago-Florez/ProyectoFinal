@@ -17,7 +17,7 @@ document.getElementById("registrar-button").onclick = function () {
         var path = window.location.pathname.split("/");
         var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "createVet.html";
         window.location.href = redirect;
-    }     
+    }
 }
 
 document.getElementById("inicia-button").onclick = function(){
