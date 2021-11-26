@@ -1,4 +1,3 @@
-
 document.getElementById("registrar-button").onclick = function () {
     var roleChoosen = document.getElementById("roleReg").value;
     console.log(roleChoosen);
@@ -30,6 +29,14 @@ document.getElementById("inicia-button").onclick = function(){
         if(userValue === data.username  && passWordValue === data.password && (data.role === "owner" || data.role === "propietario")){
             var path = window.location.pathname.split("/");
             var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "owner.html";
+            window.location.href = redirect;
+        }else if(userValue === data.username  && passWordValue === data.password && (data.role === "vet" || data.role === "veterinaria")){
+            var path = window.location.pathname.split("/");
+            var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "vet.html";
+            window.location.href = redirect;
+        }else if(userValue === data.username  && passWordValue === data.password && (data.role === "official" || data.role === "funcionario")){
+            var path = window.location.pathname.split("/");
+            var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "official.html";
             window.location.href = redirect;
         }
     })
