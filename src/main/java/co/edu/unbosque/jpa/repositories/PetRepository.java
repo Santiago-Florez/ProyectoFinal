@@ -15,7 +15,7 @@ public interface PetRepository {
 
     Optional<Pet> findId(Integer id);
 
-    Optional<Pet> findOwnerId(Integer id);
+    Optional<Pet> findOwnerId(String id);
 
     Optional<Pet> updateName(String name, Integer petId);
 

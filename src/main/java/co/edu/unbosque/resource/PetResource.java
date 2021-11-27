@@ -28,20 +28,6 @@ public class PetResource {
         }
     }
 
-    @GET
-    @Path("/{ownerId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll(@PathParam("ownerId") String ownerIdParam){
-        Integer ownerId = Integer.parseInt(ownerIdParam);
-        Optional persistedPet = Optional.of(new PetService().findOwnerId(ownerId));
-
-        if (persistedPet.isPresent()){
-            return Response.status(Response.Status.CREATED).build();
-        }else{
-            return Response.status(400).build();
-        }
-    }
-
     @PUT
     @Path("/{pet}/{update}")
     @Consumes(MediaType.APPLICATION_JSON)

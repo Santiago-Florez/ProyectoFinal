@@ -12,6 +12,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Stateless
@@ -40,25 +42,33 @@ public class PetService {
 
     }
 
+    public List<PetPOJO> findAll(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        petRepository = new PetImpl(entityManager);
+        List<Pet> pets = petRepository.findAll();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        List<PetPOJO> petPOJOS = new ArrayList<>();
+        for (Pet pet: pets){
+            petPOJOS.add(new PetPOJO(
+                    pet.getPetId(),pet.getMicroChip(),pet.getName(),pet.getSpecies(), pet.getRace(), pet.getSize(),
+                    pet.getSex(),pet.getPicture(), pet.getOwner().getPersonId()
+            ));
+        }
+
+        return petPOJOS;
+    }
+
     public Pet findPetId(Integer petId){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
         Pet persistedPet = petRepository.findId(petId).get();
-
-        entityManager.close();
-        entityManagerFactory.close();
-
-        return persistedPet;
-    }
-
-    public Pet findOwnerId(Integer ownerId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        petRepository = new PetImpl(entityManager);
-        Pet persistedPet = petRepository.findOwnerId(ownerId).get();
 
         entityManager.close();
         entityManagerFactory.close();

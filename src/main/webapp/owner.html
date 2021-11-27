@@ -13,7 +13,7 @@
     <section class="form-register" id="section">
         <h1>Ciudadanos de 4 Patas</h1>
         <h3>Propietario</h3>
-        <form class="needs-validation" id="formulario" novalidate>
+        <form class="needs-validation" id="formulario" action="img-servlet" method="post" enctype="multipart/form-data" novalidate>
 
             <label for="petId-Owner">Id mascota:</label>
             <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
@@ -56,14 +56,27 @@
             <br>
             <label for="ownerId-Owner">Id del Propietario:</label>
             <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
-            <input id="petsave-button"  type="button"  class="boton" value="Registrar"/>
+            <input id="petsave-button"  type="submit"  class="boton" value="Registrar"/>
             <input id="show-button"  type="button"  class="boton" value="Ver Mi(s) Mascota(s)"/>
             <input id="back-button"  type="button"  class="boton" value="Volver al Inicio"/>
             <br>
             <p style="color: tomato;" id="MensajeError"></p>
         </form>
 
-        <table id="table">
+        <table>
+            <thead>
+                <th>Id Mascota</th>
+                <th>Microchip</th>
+                <th>Nombre</th>
+                <th>Especie</th>
+                <th>Raza</th>
+                <th>Tamaño</th>
+                <th>Sexo</th>
+                <th>Imagen</th>
+            </thead>
+            <tbody id="table">
+
+            </tbody>
 
         </table>
     </section>

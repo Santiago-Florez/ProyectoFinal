@@ -29,7 +29,7 @@ public class PetImpl implements PetRepository {
 
     @Override
     public List<Pet> findAll() {
-        return null;
+        return entityManager.createQuery("from Pet").getResultList();
     }
 
     @Override
@@ -40,8 +40,8 @@ public class PetImpl implements PetRepository {
     }
 
     @Override
-    public Optional<Pet> findOwnerId(Integer ownerId) {
-        Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.ownerId.personId = :ownerId", Pet.class)
+    public Optional<Pet> findOwnerId(String ownerId) {
+        Pet pet = entityManager.createQuery("SELECT o FROM Pet o WHERE o.ownerId= :ownerId", Pet.class)
                 .setParameter("ownerId", ownerId).getSingleResult();
         return pet != null ? Optional.of(pet) : Optional.empty();
     }

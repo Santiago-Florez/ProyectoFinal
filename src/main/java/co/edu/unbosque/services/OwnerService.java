@@ -1,14 +1,19 @@
 package co.edu.unbosque.services;
 
 import co.edu.unbosque.jpa.entities.Owner;
+import co.edu.unbosque.jpa.entities.Pet;
 import co.edu.unbosque.jpa.repositories.OwnerImpl;
 import co.edu.unbosque.jpa.repositories.OwnerRepository;
+import co.edu.unbosque.jpa.repositories.PetImpl;
 import co.edu.unbosque.resource.pojo.OwnerPOJO;
+import co.edu.unbosque.resource.pojo.PetPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Stateless

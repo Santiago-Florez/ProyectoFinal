@@ -10,7 +10,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn
 public class Owner extends UserApp implements Serializable {
 
-    @Column(name = "person_id", unique = true)
+    @Column(name = "person_id")
     private Integer personId;
 
     @Column(name = "name")
@@ -22,7 +22,7 @@ public class Owner extends UserApp implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "ownerId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerId",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<>();
 
     public Owner() {}

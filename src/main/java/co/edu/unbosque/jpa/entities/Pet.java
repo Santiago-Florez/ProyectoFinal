@@ -13,7 +13,7 @@ public class Pet implements Serializable{
     @Column(name = "pet_id")
     private Integer petId;
 
-    @Column(name = "microchip", unique = true)
+    @Column(name = "microchip")
     private String microChip;
 
     @Column(name = "name")
@@ -35,10 +35,10 @@ public class Pet implements Serializable{
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "person_id", unique = true)
+    @JoinColumn(name = "owner_id", referencedColumnName = "person_id")
     private Owner ownerId;
 
-    @OneToMany(mappedBy = "pet_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pet_id", fetch = FetchType.LAZY)
     private List<Visit> visit = new ArrayList<>();
 
     @OneToMany(mappedBy = "pet_id", cascade = CascadeType.MERGE)
