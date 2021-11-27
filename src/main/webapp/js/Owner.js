@@ -17,7 +17,7 @@ document.getElementById("petsave-button").onclick = function(){
         "race": race,
         "size": size,
         "sex": sex,
-        "picture": img,
+        "picture": img+"",
         "ownerId": ownerId
     }
 
