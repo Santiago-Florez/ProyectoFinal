@@ -16,36 +16,36 @@
         <form class="needs-validation" id="formulario" action="img-servlet" method="post" enctype="multipart/form-data">
 
             <label for="petId-Owner">Id mascota:</label>
-            <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" />
+            <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
             <br>
             <label for="microchipPet-Owner">Microchip:</label>
-            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
+            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip" required/>
             <br>
             <label for="petName-Owner">Nombre de la mascota:</label>
-            <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" />
+            <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
             <br>
             <label for="imgMascota-Owner">Imagen de la mascota:</label>
-            <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" />
+            <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" required/>
             <br>
             <label for="racePet-Owner">Raza:</label>
-            <input type="text" class="controls" id="racePet-Owner" required name="racePet-Owner"/>
+            <input type="text" class="controls" id="racePet-Owner" placeholder="Ingrese la raza de la mascota" name="racePet-Owner" required/>
             <br>
             <label for="especie1Pet-Owner">Especie:</label>
-            <select id="especie1Pet-Owner" required>
+            <select id="especie1Pet-Owner" class="controls" required>
                 <option></option>
                 <option>Perro</option>
                 <option>Gato</option>
             </select>
 
             <label for="sexPet-Owner">Sexo:</label>
-            <select id="sexPet-Owner" required>
+            <select id="sexPet-Owner" class="controls" required>
                 <option></option>
                 <option>Macho</option>
                 <option>Hembra</option>
             </select>
 
             <label for="tamañoPet-Owner">Tamaño:</label>
-            <select id="tamañoPet-Owner" required>
+            <select id="tamañoPet-Owner" class="controls" required>
                 <option></option>
                 <option>Miniatura</option>
                 <option>Pequeño</option>
@@ -55,7 +55,8 @@
             <br>
             <br>
             <label for="ownerId-Owner">Id del Propietario:</label>
-            <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" />
+            <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
+
             <input id="petsave-button" type="submit"  class="boton" value="Registrar"/>
             <input id="show-button"  type="button"  class="boton" value="Ver Mi(s) Mascota(s)"/>
             <input id="back-button"  type="button"  class="boton" value="Volver al Inicio"/>

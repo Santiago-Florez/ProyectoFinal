@@ -61,6 +61,9 @@ document.getElementById("inicia-button").onclick = function(){
                 var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "official.html";
                 window.location.href = redirect;
             }
+            else {
+                var elementP = document.getElementById("MensajeError").innerHTML = "Usuario o contraseña incorrecta" ;
+            }
         })
     }
     if(roleChoosen === "Vet"){

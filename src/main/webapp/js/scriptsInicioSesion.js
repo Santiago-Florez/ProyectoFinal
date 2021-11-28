@@ -60,6 +60,8 @@ document.getElementById("inicia-button").onclick = function(){
                 var path = window.location.pathname.split("/");
                 var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "official.html";
                 window.location.href = redirect;
+            }else {
+                var elementP = document.getElementById("MensajeError").innerHTML = "Usuario o contraseña incorrecta" ;
             }
         })
     }

@@ -23,20 +23,30 @@
         <input class="controls" type="text" name="idVet-Visit" id="idVet-Visit" placeholder="Ingrese el id de la Veterinaria" required/>
 
         <label >Id de la mascota:</label>
-        <input class="controls" type="text" name="IdPet-Visit" id="IdPet-Visit" placeholder="Ingrese el id de la mascota" required/>
+        <input class="controls" type="text" name="IdPet-Visit" id="idPet-Visit" placeholder="Ingrese el id de la mascota" required/>
 
         <label >Tipo de visita:</label>
-        <input class="controls" type="number" name="typeVisitVet" id="typeVisitVet" placeholder="Ingrese el Microchip"/>
+        <select class="controls" name="typeVisitVet" id="typeVisitVet">
+            <option value="tipo">Tipo Visita</option>
+            <option value="esterilizacion">Esterilización</option>
+            <option value="microchip">Implantar Microchip</option>
+            <option value="vacunacion">Vacunación</option>
+            <option value="desparasitacion">Desparasitación</option>
+            <option value="urgencia">Urgencia</option>
+            <option value="control">Control</option>
+        </select>
 
         <label >Descripción de la visita</label>
         <textarea class="controls" name="descriptionVisitVet" id="descriptionVisitVet" placeholder="Ingrese la imagen de la mascota" required></textarea>
 
         <br>
 
-        <input id="petsave-button"  type="button"  class="botons" value="Registrar"/>
+        <input id="visitsave-button"  type="button"  class="botons" value="Registrar"/>
         <input id="show-button"  type="button"  class="botons" value="Mostrar lista"/>
+        <input id="back-button"  type="button"  class="boton" value="Volver al Inicio"/>
+        <p id="MensajeError" style="color: tomato;"></p>
     </form>
 </section>
-<script src="./js/scriptVet.js"></script>
+<script src="./js/Vet.js"></script>
 </body>
 </html>

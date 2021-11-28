@@ -25,7 +25,7 @@ document.getElementById("petsave-button").onclick = function(){
     if(pet_Id === "" || ownerId === "" || petName === "" || img === "" || race === "" || species === "" || sex === "" || size === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos del Usuario para registrarlo" ;
     }else{
-        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/pets",{
+        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/pets",{
             method:"POST",
             body: JSON.stringify(petJSON), // enviar el JSON para la API
             headers:{
