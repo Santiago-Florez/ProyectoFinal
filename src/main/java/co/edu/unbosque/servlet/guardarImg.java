@@ -1,5 +1,7 @@
 package co.edu.unbosque.servlet;
 
+import co.edu.unbosque.servlet.dto.Imagenes;
+import com.google.gson.Gson;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,8 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Date;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Random;
 
 @WebServlet(name = "img-servlet", value = "/img-servlet")
@@ -21,8 +24,9 @@ import java.util.Random;
         maxRequestSize = 1024 * 1024 * 5 * 5)
 public class guardarImg extends HttpServlet {
 
-    private String UPLOAD_DIRECTORY = "imgsPets";
+    private final String UPLOAD_DIRECTORY = "imgsPets";
     private String fileName = "";
+    private Imagenes imgs;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
@@ -36,11 +40,12 @@ public class guardarImg extends HttpServlet {
         try {
             for (Part part : request.getParts()) {
                 fileName = part.getSubmittedFileName();
-                Random rnd = new Random();
-                int newName = rnd.nextInt(100000);
-                fileName = String.valueOf(newName) + "." + FilenameUtils.getExtension(fileName);
                 part.write(uploadPath + File.separator + fileName);
+
             }
+            ArrayList<Imagenes> dataImg = new ArrayList<>();
+            imgs = new Imagenes(fileName);
+            dataImg.add(imgs);
             response.sendRedirect(request.getContextPath() + "/owner.html");
 
         } catch (FileNotFoundException e) {

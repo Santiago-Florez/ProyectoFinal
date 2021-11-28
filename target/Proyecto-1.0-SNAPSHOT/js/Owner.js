@@ -1,5 +1,6 @@
+
 document.getElementById("petsave-button").onclick = function(){
-    var petId = document.getElementById("petId-Owner").value;
+    var pet_Id = document.getElementById("petId-Owner").value;
     var microchip = document.getElementById("microchipPet-Owner").value;
     var petName = document.getElementById("petName-Owner").value;
     var img = document.getElementById("imgMascota-Owner").value;
@@ -10,7 +11,7 @@ document.getElementById("petsave-button").onclick = function(){
     var ownerId = document.getElementById("ownerId-Owner").value;
 
     var petJSON = {
-        "petId": petId,
+        "petId": pet_Id,
         "microchip": microchip,
         "name": petName,
         "species": species,
@@ -21,7 +22,7 @@ document.getElementById("petsave-button").onclick = function(){
         "ownerId": ownerId
     }
 
-    if(petId === "" || ownerId === "" || petName === "" || img === "" || race === "" || species === "" || sex === "" || size === ""){
+    if(pet_Id === "" || ownerId === "" || petName === "" || img === "" || race === "" || species === "" || sex === "" || size === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos del Usuario para registrarlo" ;
     }else{
         fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/pets",{
@@ -49,10 +50,11 @@ document.getElementById("back-button").onclick = function (){
     window.location.href = redirect;
 }
 
-var rowId = 0;
-var table;
-var tableTr;
+
 document.getElementById("show-button").onclick = function (){
+    var rowId = 0;
+    var table;
+    var tableTr;
     console.log(document.cookie)
     var cookies = document.cookie.split(";")
     var cookieId
@@ -63,44 +65,43 @@ document.getElementById("show-button").onclick = function (){
     }
 
     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
-        .then(response => response.json())
-        .then(data => {
-            for (let i = 0; i < data.length; i++){
-                var ownerIdStr = ""+data[i].ownerId;
-                if (ownerIdStr === cookieId[1]){
-                    data.map((element) => {
-                        rowId += 1;
-                        table = document.getElementById("table");
-                        tableTr = document.createElement("tr");
-                        tableTr.setAttribute("id", "row"+rowId);
-                        let tdId = document.createElement("td");
-                        let tdMicrochip = document.createElement("td")
-                        let tdName = document.createElement("td")
-                        let tdSpecies = document.createElement("td")
-                        let tdRace = document.createElement("td")
-                        let tdSize = document.createElement("td")
-                        let tdSex = document.createElement("td")
-                        let tdPicture = document.createElement("img")
-                        tdId.innerHTML = element.petId+"";
-                        tdMicrochip.innerHTML = element.microchip;
-                        tdName.innerHTML = element.name;
-                        tdSpecies.innerHTML = element.species;
-                        tdRace.innerHTML = element.race;
-                        tdSize.innerHTML = element.size;
-                        tdSex.innerHTML = element.sex;
-                        tdPicture.setAttribute("src", "")
-                        tdPicture.setAttribute("width", "150px");
-                        tableTr.appendChild(tdId)
-                        tableTr.appendChild(tdMicrochip)
-                        tableTr.appendChild(tdName)
-                        tableTr.appendChild(tdSpecies)
-                        tableTr.appendChild(tdRace)
-                        tableTr.appendChild(tdSize)
-                        tableTr.appendChild(tdSex)
-                        tableTr.appendChild(tdPicture)
-                        table.appendChild(tableTr)
-                    })
-                }
+    .then(response => response.json())
+    .then(data => {
+        console.log("Datos " + data)
+        console.log(cookieId)
+        data.map((element) => {
+            rowId += 1;
+            table = document.getElementById("table");
+            tableTr = document.createElement("tr");
+            tableTr.setAttribute("id", "row"+rowId);
+            let tdMicrochip = document.createElement("td")
+            let tdName = document.createElement("td")
+            let tdSpecies = document.createElement("td")
+            let tdRace = document.createElement("td")
+            let tdSize = document.createElement("td")
+            let tdSex = document.createElement("td")
+            let tdPicture = document.createElement("img")
+            console.log("Owner Id " + element.ownerId)
+            if(element.ownerId == +cookieId[1]){
+                tdMicrochip.innerHTML = element.microchip;
+                tdName.innerHTML = element.name;
+                tdSpecies.innerHTML = element.species;
+                tdRace.innerHTML = element.race;
+                tdSize.innerHTML = element.size;
+                tdSex.innerHTML = element.sex;
+                var img = element.picture.substring(12)
+                console.log("Img " + img)
+                tdPicture.setAttribute("src", "./imgsPets/"+ img)
+                tdPicture.setAttribute("width", "150px");
+                tableTr.appendChild(tdMicrochip)
+                tableTr.appendChild(tdName)
+                tableTr.appendChild(tdSpecies)
+                tableTr.appendChild(tdRace)
+                tableTr.appendChild(tdSize)
+                tableTr.appendChild(tdSex)
+                tableTr.appendChild(tdPicture)
+                table.appendChild(tableTr)
             }
         })
+    })
 }

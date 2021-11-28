@@ -13,19 +13,19 @@
     <section class="form-register" id="section">
         <h1>Ciudadanos de 4 Patas</h1>
         <h3>Propietario</h3>
-        <form class="needs-validation" id="formulario" action="img-servlet" method="post" enctype="multipart/form-data" novalidate>
+        <form class="needs-validation" id="formulario" action="img-servlet" method="post" enctype="multipart/form-data">
 
             <label for="petId-Owner">Id mascota:</label>
-            <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
+            <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" />
             <br>
             <label for="microchipPet-Owner">Microchip:</label>
             <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
             <br>
             <label for="petName-Owner">Nombre de la mascota:</label>
-            <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
+            <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" />
             <br>
             <label for="imgMascota-Owner">Imagen de la mascota:</label>
-            <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" required/>
+            <input class="controls" type="file" name="imgMascota-Owner" id="imgMascota-Owner" placeholder="Ingrese la imagen de la mascota" />
             <br>
             <label for="racePet-Owner">Raza:</label>
             <input type="text" class="controls" id="racePet-Owner" required name="racePet-Owner"/>
@@ -55,17 +55,16 @@
             <br>
             <br>
             <label for="ownerId-Owner">Id del Propietario:</label>
-            <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
-            <input id="petsave-button"  type="submit"  class="boton" value="Registrar"/>
+            <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" />
+            <input id="petsave-button" type="submit"  class="boton" value="Registrar"/>
             <input id="show-button"  type="button"  class="boton" value="Ver Mi(s) Mascota(s)"/>
             <input id="back-button"  type="button"  class="boton" value="Volver al Inicio"/>
             <br>
             <p style="color: tomato;" id="MensajeError"></p>
         </form>
 
-        <table>
+        <table border="1px">
             <thead>
-                <th>Id Mascota</th>
                 <th>Microchip</th>
                 <th>Nombre</th>
                 <th>Especie</th>
