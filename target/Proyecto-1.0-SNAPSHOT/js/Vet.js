@@ -42,6 +42,56 @@ document.getElementById("volver-button").onclick = function (){
     window.location.href = ir;
 }
 
+document.getElementById("showVisits-button").onclick = function (){
+    document.getElementById("filtroVisit").disable = false;
+    var rowId = 0;
+    var table;
+    var tableTr;
+    console.log(document.cookie)
+    var cookies = document.cookie.split(";")
+    var cookieId
+    for (let i = 0; i < cookies.length; i++){
+        if (cookies[i].length == 5 || cookies[i].length == 4){
+            cookieId = cookies[i].split("=")
+        }
+    }
+
+    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visitsList")
+        .then(response => response.json())
+        .then(data => {
+            console.log("Datos " + data)
+            console.log(cookieId)
+            data.map((element) => {
+                rowId += 1;
+                table = document.getElementById("table");
+                tableTr = document.createElement("tr");
+                tableTr.setAttribute("id", "row"+rowId);
+                let tdVisitId = document.createElement("td")
+                let tdCreatedAt = document.createElement("td")
+                let tdType = document.createElement("td")
+                let tdDescription = document.createElement("td")
+                let tdPetId = document.createElement("td")
+                let tdVetId = document.createElement("td")
+                console.log("Owner Id " + element.ownerId)
+                if(element.ownerId == +cookieId[1]){
+                    tdVisitId.innerHTML = element.visitId;
+                    tdCreatedAt.innerHTML = element.createdAt;
+                    tdType.innerHTML = element.type;
+                    tdDescription.innerHTML = element.description;
+                    tdPetId.innerHTML = element.petId;
+                    tdVetId.innerHTML = element.vetId;
+                    tableTr.appendChild(tdVisitId)
+                    tableTr.appendChild(tdCreatedAt)
+                    tableTr.appendChild(tdType)
+                    tableTr.appendChild(tdDescription)
+                    tableTr.appendChild(tdPetId)
+                    tableTr.appendChild(tdVetId)
+                    table.appendChild(tableTr)
+                }
+            })
+        })
+}
+
 document.getElementById("edit-button").onclick = function (){
     let modal = document.getElementById("myModal");
     modal.className ="modal fade show";
@@ -51,13 +101,7 @@ document.getElementById("edit-button").onclick = function (){
         var cookies = document.cookie.split("; ")
         console.log(cookies)
         var cookieusername
-        var cookiename
-        var cookierole
-        var cookieemail
         cookieusername = cookies[0].split("=")
-        cookiename = cookies[1].split("=")
-        cookierole= cookies[2].split("=")
-        cookieemail = cookies[3].split("=")
         if (newAddress === "" && newNeighborhood === ""){
             modal.className ="modal fade";
         }else if(newAddress != "" && newNeighborhood === ""){
@@ -66,19 +110,15 @@ document.getElementById("edit-button").onclick = function (){
                 .then(response => response.json())
                 .then(data => {
                     let username = cookieusername[1];
-                    let password = passwordConfirm;
-                    let email = cookieemail[1];
-                    let name = cookiename[1];
                     let address = document.getElementById("newaddressVet").value;
-                    let localidad = data.neighborhood;
-                    if (data.password === password){
+                    if (data.password === passwordConfirm){
                         let vetJSON = {
                             "username": username,
-                            "password": password,
-                            "email": email,
-                            "name": name,
+                            "password": data.password,
+                            "email": data.email,
+                            "name": data.name,
                             "address": address,
-                            "neighborhood": localidad
+                            "neighborhood": data.neighborhood
                         };
                         fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/address",{
                             method:"PUT",
@@ -99,17 +139,14 @@ document.getElementById("edit-button").onclick = function (){
                 .then(data => {
                     let username = cookieusername[1];
                     let password = passwordConfirm;
-                    let email = cookieemail[1];
-                    let name = cookiename[1];
-                    let address = data.address;
                     let localidad = document.getElementById("newlocalidadVet").value;
                     if (data.password === password){
                         let vetJSON = {
                             "username": username,
                             "password": password,
-                            "email": email,
-                            "name": name,
-                            "address": address,
+                            "email": data.email,
+                            "name": data.name,
+                            "address": data.address,
                             "neighborhood": localidad
                         };
                         fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/neighborhood",{

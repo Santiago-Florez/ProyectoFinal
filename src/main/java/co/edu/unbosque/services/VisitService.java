@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Stateless
@@ -61,5 +63,25 @@ public class VisitService {
         entityManagerFactory.close();
 
         return persistedPet;
+    }
+
+    public List<VisitPOJO> findAll(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        visitRepository = new VisitImpl(entityManager);
+        List<Visit> visits = visitRepository.findAll();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        List<VisitPOJO> visitPOJOS = new ArrayList<>();
+        for (Visit visit: visits){
+            visitPOJOS.add(new VisitPOJO(visit.getVisit_id(), visit.getCreated_at(),
+                    visit.getType(), visit.getDescription(),
+                    visit.getVet_id().getUsername(), visit.getPet_id().getPetId()));
+        }
+
+        return visitPOJOS;
     }
 }

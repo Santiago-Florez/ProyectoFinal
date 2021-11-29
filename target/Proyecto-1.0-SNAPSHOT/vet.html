@@ -42,7 +42,8 @@
         <br>
 
         <input id="visitsave-button"  type="button"  class="botons" value="Registrar"/>
-        <input id="show-button"  type="button"  class="botons" value="Mostrar lista"/>
+        <input id="showVisits-button"  type="button"  class="botons" value="Mostrar lista"/>
+        <input id="filtroVisit" type="text" class="controls" placeholder="Filtrar por Nombre de Mascota" disabled="true">
         <input id="volver-button"  type="button"  class="botons" value="Volver al Inicio"/>
         <button id="edit-button"  type="button"  class="botons" data-toggle="modal" data-target="#myModal">Modificar Dirección o Vecindario</button>
 
@@ -98,6 +99,21 @@
         </div>
         <p id="MensajeError" style="color: tomato;"></p>
     </form>
+
+    <table border="1px" class="controls">
+        <thead>
+        <th>Id Visita</th>
+        <th>Creada el...</th>
+        <th>Tipo</th>
+        <th>Descripcion</th>
+        <th>Id Mascota</th>
+        <th>Id Veterinaria</th>
+        </thead>
+        <tbody id="table">
+
+        </tbody>
+
+    </table>
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
