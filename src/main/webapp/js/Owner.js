@@ -1,4 +1,4 @@
-
+console.log(document.cookie)
 document.getElementById("petsave-button").onclick = function(){
     var pet_Id = document.getElementById("petId-Owner").value;
     var microchip = document.getElementById("microchipPet-Owner").value;
@@ -25,20 +25,20 @@ document.getElementById("petsave-button").onclick = function(){
     if(pet_Id === "" || ownerId === "" || petName === "" || img === "" || race === "" || species === "" || sex === "" || size === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos del Usuario para registrarlo" ;
     }else{
-        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/pets",{
+        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/pets",{
             method:"POST",
             body: JSON.stringify(petJSON), // enviar el JSON para la API
             headers:{
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            alert("Mascota Creada Exitosamente!")
-            var path = window.location.pathname.split("/");
-            var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "owner.html";
-            window.location.href = redirect;
-        })
+            .then(response => response.json())
+            .then(data => {
+                alert("Mascota Creada Exitosamente!")
+                var path = window.location.pathname.split("/");
+                var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "owner.html";
+                window.location.href = redirect;
+            })
         var elementP = document.getElementById("MensajeError");
         elementP.innerHTML = "";
     }
@@ -65,45 +65,45 @@ document.getElementById("show-button").onclick = function (){
     }
 
     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
-    .then(response => response.json())
-    .then(data => {
-        console.log("Datos " + data)
-        console.log(cookieId)
-        data.map((element) => {
-            rowId += 1;
-            table = document.getElementById("table");
-            tableTr = document.createElement("tr");
-            tableTr.setAttribute("id", "row"+rowId);
-            let tdMicrochip = document.createElement("td")
-            let tdName = document.createElement("td")
-            let tdSpecies = document.createElement("td")
-            let tdRace = document.createElement("td")
-            let tdSize = document.createElement("td")
-            let tdSex = document.createElement("td")
-            let tdPicture = document.createElement("img")
-            console.log("Owner Id " + element.ownerId)
-            if(element.ownerId == +cookieId[1]){
-                tdMicrochip.innerHTML = element.microchip;
-                tdName.innerHTML = element.name;
-                tdSpecies.innerHTML = element.species;
-                tdRace.innerHTML = element.race;
-                tdSize.innerHTML = element.size;
-                tdSex.innerHTML = element.sex;
-                var img = element.picture.substring(12)
-                console.log("Img " + img)
-                tdPicture.setAttribute("src", "./imgsPets/"+ img)
-                tdPicture.setAttribute("width", "150px");
-                tableTr.appendChild(tdMicrochip)
-                tableTr.appendChild(tdName)
-                tableTr.appendChild(tdSpecies)
-                tableTr.appendChild(tdRace)
-                tableTr.appendChild(tdSize)
-                tableTr.appendChild(tdSex)
-                tableTr.appendChild(tdPicture)
-                table.appendChild(tableTr)
-            }
+        .then(response => response.json())
+        .then(data => {
+            console.log("Datos " + data)
+            console.log(cookieId)
+            data.map((element) => {
+                rowId += 1;
+                table = document.getElementById("table");
+                tableTr = document.createElement("tr");
+                tableTr.setAttribute("id", "row"+rowId);
+                let tdMicrochip = document.createElement("td")
+                let tdName = document.createElement("td")
+                let tdSpecies = document.createElement("td")
+                let tdRace = document.createElement("td")
+                let tdSize = document.createElement("td")
+                let tdSex = document.createElement("td")
+                let tdPicture = document.createElement("img")
+                console.log("Owner Id " + element.ownerId)
+                if(element.ownerId == +cookieId[1]){
+                    tdMicrochip.innerHTML = element.microchip;
+                    tdName.innerHTML = element.name;
+                    tdSpecies.innerHTML = element.species;
+                    tdRace.innerHTML = element.race;
+                    tdSize.innerHTML = element.size;
+                    tdSex.innerHTML = element.sex;
+                    var img = element.picture.substring(12)
+                    console.log("Img " + img)
+                    tdPicture.setAttribute("src", "./imgsPets/"+ img)
+                    tdPicture.setAttribute("width", "150px");
+                    tableTr.appendChild(tdMicrochip)
+                    tableTr.appendChild(tdName)
+                    tableTr.appendChild(tdSpecies)
+                    tableTr.appendChild(tdRace)
+                    tableTr.appendChild(tdSize)
+                    tableTr.appendChild(tdSex)
+                    tableTr.appendChild(tdPicture)
+                    table.appendChild(tableTr)
+                }
+            })
         })
-    })
 }
 
 document.getElementById("edit-button").onclick = function (){
@@ -115,38 +115,30 @@ document.getElementById("edit-button").onclick = function (){
         var cookies = document.cookie.split("; ")
         console.log(cookies)
         var cookieusername
-        var cookiename
-        var cookierole
-        var cookieemail
         cookieusername = cookies[0].split("=")
-        cookiename = cookies[1].split("=")
-        cookierole= cookies[2].split("=")
-        cookieemail = cookies[3].split("=")
         if (newAddress === "" && newNeighborhood === ""){
             modal.className ="modal fade";
         }else if(newAddress != "" && newNeighborhood === ""){
             var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
-            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/"+cookieusername[1])
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/"+cookieusername[1])
                 .then(response => response.json())
                 .then(data => {
                     let username = cookieusername[1];
                     let password = passwordConfirm;
-                    let email = cookieemail[1];
-                    let name = cookiename[1];
                     let address = document.getElementById("newaddressOwner").value;
-                    let localidad = data.neighborhood;
                     if (data.password === password){
-                        let vetJSON = {
+                        let ownerJSON = {
                             "username": username,
+                            "email": data.email,
                             "password": password,
-                            "email": email,
-                            "name": name,
+                            "personId":data.personId,
+                            "name": data.name,
                             "address": address,
-                            "neighborhood": localidad
+                            "neighborhood": data.neighborhood
                         };
-                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/address",{
+                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/owners/owner/address",{
                             method:"PUT",
-                            body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                            body: JSON.stringify(ownerJSON), // enviar el JSON para la API
                             headers:{
                                 'Content-Type': 'application/json'
                             }
@@ -158,27 +150,25 @@ document.getElementById("edit-button").onclick = function (){
                 })
         }else if (newAddress === "" && newNeighborhood != ""){
             var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
-            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/"+cookieusername[1])
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/"+cookieusername[1])
                 .then(response => response.json())
                 .then(data => {
                     let username = cookieusername[1];
                     let password = passwordConfirm;
-                    let email = cookieemail[1];
-                    let name = cookiename[1];
-                    let address = data.address;
                     let localidad = document.getElementById("newlocalidadOwner").value;
                     if (data.password === password){
-                        let vetJSON = {
+                        let ownerJSON = {
                             "username": username,
+                            "email": data.email,
                             "password": password,
-                            "email": email,
-                            "name": name,
-                            "address": address,
+                            "personId":data.personId,
+                            "name": data.name,
+                            "address": data.address,
                             "neighborhood": localidad
                         };
-                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/neighborhood",{
+                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/owners/owner/neighborhood",{
                             method:"PUT",
-                            body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                            body: JSON.stringify(ownerJSON), // enviar el JSON para la API
                             headers:{
                                 'Content-Type': 'application/json'
                             }
