@@ -36,9 +36,10 @@ document.getElementById("inicia-button").onclick = function(){
         fetch('http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/' + userValue)
         .then(response => response.json())
         .then(data => {
-            console.log(data.personId)
             if(userValue === data.username  && passWordValue === data.password && (data.role === "owner" || data.role === "propietario")){
                 document.cookie = "username=" + userValue;
+                document.cookie = "name=" + data.name;
+                document.cookie = "email=" + data.email;
                 document.cookie = "id=" + data.personId;
                 document.cookie = "role="+data.role;
                 var path = window.location.pathname.split("/");
@@ -60,8 +61,7 @@ document.getElementById("inicia-button").onclick = function(){
                 var path = window.location.pathname.split("/");
                 var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "official.html";
                 window.location.href = redirect;
-            }
-            else {
+            }else {
                 var elementP = document.getElementById("MensajeError").innerHTML = "Usuario o contraseña incorrecta" ;
             }
         })
@@ -74,7 +74,8 @@ document.getElementById("inicia-button").onclick = function(){
         .then(data => {
             if(userValue === data.username  && passWordValue === data.password && (data.role === "VET" || data.role === "veterinaria")){
                 document.cookie = "username=" + userValue;
-                document.cookie = "id=" + data.personId;
+                document.cookie = "name=" + data.name;
+                document.cookie = "email=" + data.email;
                 document.cookie = "role="+data.role;
                 var path = window.location.pathname.split("/");
                 var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "vet.html";

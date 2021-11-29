@@ -18,7 +18,7 @@ public class VetService {
 
     public Optional<VetPOJO> createVet(VetPOJO vetPOJO) {
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetImpl(entityManager);
@@ -41,7 +41,7 @@ public class VetService {
     }
 
     public Vet findUsername(String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetImpl(entityManager);
@@ -54,7 +54,7 @@ public class VetService {
     }
 
     public VetPOJO updateName(String newName, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetImpl(entityManager);
@@ -75,7 +75,7 @@ public class VetService {
     }
 
     public VetPOJO updateAddress(String newAddress, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetImpl(entityManager);
@@ -96,7 +96,7 @@ public class VetService {
     }
 
     public VetPOJO updateNeighborhood(String newNeigborhood, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         vetRepository = new VetImpl(entityManager);

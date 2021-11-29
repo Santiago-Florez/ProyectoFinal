@@ -23,7 +23,7 @@ public class PetService {
     OwnerRepository ownerRepository;
 
     public PetPOJO createdPet(Integer petId, String microchip, String name, String species, String race, String size, String sex, String picture, Integer ownerId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -43,7 +43,7 @@ public class PetService {
     }
 
     public List<PetPOJO> findAll(){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -64,7 +64,7 @@ public class PetService {
     }
 
     public Pet findPetId(Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -77,7 +77,7 @@ public class PetService {
     }
 
     public PetPOJO updateName(String newName, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -95,7 +95,7 @@ public class PetService {
     }
 
     public PetPOJO updateSpecies(String newSpecies, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -113,7 +113,7 @@ public class PetService {
     }
 
     public PetPOJO updateRace(String newRace, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -131,7 +131,7 @@ public class PetService {
     }
 
     public PetPOJO updateSize(String newSize, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -149,7 +149,7 @@ public class PetService {
     }
 
     public PetPOJO updateSex(String newSex, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -167,7 +167,7 @@ public class PetService {
     }
 
     public PetPOJO updatePicture(String newPicture, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);
@@ -186,7 +186,7 @@ public class PetService {
     }
 
     public PetPOJO updateMicrochip(String newMicrochip, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);

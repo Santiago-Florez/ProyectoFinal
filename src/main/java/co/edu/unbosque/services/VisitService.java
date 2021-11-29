@@ -20,7 +20,7 @@ public class VisitService {
     PetRepository petRepository;
 
     public VisitPOJO createVisit(String visitId, String createdAt, String type, String description, String vetId, Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         visitRepository = new VisitImpl(entityManager);
@@ -51,7 +51,7 @@ public class VisitService {
     }
 
     public Pet findPetId(Integer petId){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         petRepository = new PetImpl(entityManager);

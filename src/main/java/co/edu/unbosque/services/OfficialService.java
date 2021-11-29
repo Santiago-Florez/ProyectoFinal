@@ -17,7 +17,7 @@ public class OfficialService {
     OfficialRepository officialRepository;
 
     public Optional<OfficialPOJO> createOfficial(OfficialPOJO officialPOJO){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
@@ -38,7 +38,7 @@ public class OfficialService {
     }
 
     public Official findUsername(String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
@@ -51,7 +51,7 @@ public class OfficialService {
     }
 
     public OfficialPOJO updateName(String newName, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
@@ -70,7 +70,7 @@ public class OfficialService {
     }
 
     public OfficialPOJO updateEmail(String newEmail, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);

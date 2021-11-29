@@ -105,3 +105,90 @@ document.getElementById("show-button").onclick = function (){
         })
     })
 }
+
+document.getElementById("edit-button").onclick = function (){
+    let modal = document.getElementById("myModal");
+    modal.className ="modal fade show";
+    document.getElementById("actualizarOwner").onclick = function (){
+        let newAddress = document.getElementById("newaddressOwner").value
+        let newNeighborhood = document.getElementById("newlocalidadOwner").value
+        var cookies = document.cookie.split("; ")
+        console.log(cookies)
+        var cookieusername
+        var cookiename
+        var cookierole
+        var cookieemail
+        cookieusername = cookies[0].split("=")
+        cookiename = cookies[1].split("=")
+        cookierole= cookies[2].split("=")
+        cookieemail = cookies[3].split("=")
+        if (newAddress === "" && newNeighborhood === ""){
+            modal.className ="modal fade";
+        }else if(newAddress != "" && newNeighborhood === ""){
+            var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/"+cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let username = cookieusername[1];
+                    let password = passwordConfirm;
+                    let email = cookieemail[1];
+                    let name = cookiename[1];
+                    let address = document.getElementById("newaddressOwner").value;
+                    let localidad = data.neighborhood;
+                    if (data.password === password){
+                        let vetJSON = {
+                            "username": username,
+                            "password": password,
+                            "email": email,
+                            "name": name,
+                            "address": address,
+                            "neighborhood": localidad
+                        };
+                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/address",{
+                            method:"PUT",
+                            body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                            headers:{
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(data =>{
+                                alert("Se actualizo la Dirección")
+                            })
+                    }
+                })
+        }else if (newAddress === "" && newNeighborhood != ""){
+            var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/"+cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let username = cookieusername[1];
+                    let password = passwordConfirm;
+                    let email = cookieemail[1];
+                    let name = cookiename[1];
+                    let address = data.address;
+                    let localidad = document.getElementById("newlocalidadOwner").value;
+                    if (data.password === password){
+                        let vetJSON = {
+                            "username": username,
+                            "password": password,
+                            "email": email,
+                            "name": name,
+                            "address": address,
+                            "neighborhood": localidad
+                        };
+                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/vets/vet/neighborhood",{
+                            method:"PUT",
+                            body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                            headers:{
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(data =>{
+                                alert("Se actualizo la Dirección")
+                            })
+                    }
+                })
+        }
+
+    }
+}

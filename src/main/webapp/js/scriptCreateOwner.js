@@ -20,7 +20,7 @@ document.getElementById("registrarOwner").onclick = function(){
     if(userName === "" || email === "" || passWord === "" || personId == null || name === "" || address === "" || vecindario === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos del Usuario para registrarlo" ;
     }else{
-        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/owners",{
+        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners",{
             method:"POST",
             body: JSON.stringify(ownerJson), // enviar el JSON para la API
             headers:{
