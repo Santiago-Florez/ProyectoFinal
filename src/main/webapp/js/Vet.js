@@ -19,7 +19,7 @@ document.getElementById("visitsave-button").onclick = function (){
     if (visitId === "" || createdAt === "" || typeVisit === "" || description === "" || vetId === "" || petId === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos de la Visita para registrarla";
     }else{
-        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visits", {
+        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visits/", {
             method: "POST",
             body: JSON.stringify(visitJSON), // enviar el JSON para la API
             headers: {
@@ -34,16 +34,23 @@ document.getElementById("visitsave-button").onclick = function (){
                 window.location.href = redirect;
             })
     }
+    document.getElementById("filtroVisit").disable = false;
 }
 
 document.getElementById("volver-button").onclick = function (){
+    var cookies = document.cookie.split(";")
+    for (var i = 0; i < cookies.length; i++){
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    }
     var ruta = window.location.pathname.split("/");
     var ir = window.location.protocol + "//" + window.location.host + "/" + ruta[1] + "/" + "index.html";
     window.location.href = ir;
 }
 
 document.getElementById("showVisits-button").onclick = function (){
-    document.getElementById("filtroVisit").disable = false;
+
     var rowId = 0;
     var table;
     var tableTr;
@@ -51,7 +58,7 @@ document.getElementById("showVisits-button").onclick = function (){
     var cookies = document.cookie.split(";")
     var cookieId
     for (let i = 0; i < cookies.length; i++){
-        if (cookies[i].length == 5 || cookies[i].length == 4){
+        if (cookies[i].length == 11 || cookies[i].length == 10){
             cookieId = cookies[i].split("=")
         }
     }
@@ -59,7 +66,7 @@ document.getElementById("showVisits-button").onclick = function (){
     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visitsList")
         .then(response => response.json())
         .then(data => {
-            console.log("Datos " + data)
+            console.log(data)
             console.log(cookieId)
             data.map((element) => {
                 rowId += 1;
@@ -72,8 +79,8 @@ document.getElementById("showVisits-button").onclick = function (){
                 let tdDescription = document.createElement("td")
                 let tdPetId = document.createElement("td")
                 let tdVetId = document.createElement("td")
-                console.log("Owner Id " + element.ownerId)
-                if(element.ownerId == +cookieId[1]){
+                console.log(element.vetId)
+                if(element.vetId == cookieId[1]){
                     tdVisitId.innerHTML = element.visitId;
                     tdCreatedAt.innerHTML = element.createdAt;
                     tdType.innerHTML = element.type;

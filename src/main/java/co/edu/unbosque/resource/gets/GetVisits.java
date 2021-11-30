@@ -1,4 +1,4 @@
-package co.edu.unbosque.resource;
+package co.edu.unbosque.resource.gets;
 
 import co.edu.unbosque.services.VisitService;
 
@@ -17,7 +17,6 @@ public class GetVisits {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getVisits(){
         Optional persitedVisits = Optional.of(new VisitService().findAll());
-
         return Response.ok(persitedVisits.get()).build();
     }
 

@@ -1,6 +1,6 @@
-package co.edu.unbosque.resource;
+package co.edu.unbosque.resource.gets;
 
-import co.edu.unbosque.services.OfficialService;
+import co.edu.unbosque.services.VetService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,16 +10,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
 
-@Path("/officials/{username}")
-public class GetOfficialByUserName {
+@Path("/vets/{username}")
+public class GetVetByUserName {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@PathParam("username") String username){
-        Optional persitedOfficial = Optional.of(new OfficialService().findUsername(username));
+        Optional persitedVet = Optional.of(new VetService().findUsername(username));
 
-        if (persitedOfficial.isPresent()){
-            return Response.status(Response.Status.OK).entity(persitedOfficial.get()).build();
+        if (persitedVet.isPresent()){
+            return Response.status(Response.Status.OK).entity(persitedVet.get()).build();
         }else{
             return Response.status(400).build();
         }

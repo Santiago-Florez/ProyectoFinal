@@ -33,7 +33,7 @@ public class VetService {
             return Optional.of(new VetPOJO(persistedVet.get().getUsername(),
                     persistedVet.get().getPassword(),
                     persistedVet.get().getEmail(),
-                    persistedVet.get().getName(),persistedVet.get().getAddress(),
+                    persistedVet.get().getName() ,persistedVet.get().getAddress(),
                     persistedVet.get().getNeighborhood()));
         } else {
             return Optional.empty();

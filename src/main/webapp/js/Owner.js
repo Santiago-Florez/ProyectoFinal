@@ -45,6 +45,13 @@ document.getElementById("petsave-button").onclick = function(){
 }
 
 document.getElementById("back-button").onclick = function (){
+    var cookies = document.cookie.split(";")
+    for (var i = 0; i < cookies.length; i++){
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    }
+
     var path = window.location.pathname.split("/");
     var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "index.html";
     window.location.href = redirect;

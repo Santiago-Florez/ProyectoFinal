@@ -28,21 +28,22 @@ public class VisitService {
         visitRepository = new VisitImpl(entityManager);
         userAppRepository = new VetImpl(entityManager);
         petRepository = new PetImpl(entityManager);
-        Optional<Pet> pet = petRepository.findId(petId);
         Optional<Vet> userApp = userAppRepository.findByUsername(vetId);
+        Optional<Pet> pet = petRepository.findId(petId);
+
+        Visit visit = new Visit(visitId, createdAt, type, description);
 
         pet.ifPresent(pet1 -> {
-            Visit visit = new Visit(visitId, createdAt, type, description);
             visit.setPet_id(pet1);
             pet1.addVisit(visit);
-            visitRepository.save(visit);
         });
+
         userApp.ifPresent(userApp1 -> {
-            Visit visit = new Visit(visitId, createdAt, type, description);
             visit.setVet_id(userApp1);
             userApp1.addVisit(visit);
-            visitRepository.save(visit);
         });
+
+        visitRepository.save(visit);
 
         entityManager.close();
         entityManagerFactory.close();

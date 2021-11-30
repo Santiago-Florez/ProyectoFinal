@@ -14,16 +14,16 @@
     <form class="needs-validation" id="formulario" novalidate>
 
         <label >Id de la visita:</label>
-        <input class="controls" type="number" name="idVisit" id="idVisit" placeholder="Ingrese la id de la visita" required/>
+        <input class="controls" type="number" name="idVisit" id="idVisit" placeholder="Ingrese la Id de la visita" required/>
 
         <label >Fecha de registro:</label>
         <input class="controls" type="date" name="createdAt" id="fechaVisit" placeholder="Ingrese la Fecha de Registro" required/>
 
         <label >Id de la Veterinaria:</label>
-        <input class="controls" type="text" name="idVet-Visit" id="idVet-Visit" placeholder="Ingrese el id de la Veterinaria" required/>
+        <input class="controls" type="text" name="idVet-Visit" id="idVet-Visit" placeholder="Ingrese el Nombre de la Veterinaria" required/>
 
         <label >Id de la mascota:</label>
-        <input class="controls" type="text" name="IdPet-Visit" id="idPet-Visit" placeholder="Ingrese el id de la mascota" required/>
+        <input class="controls" type="text" name="IdPet-Visit" id="idPet-Visit" placeholder="Ingrese el Id de la mascota" required/>
 
         <label >Tipo de visita:</label>
         <select class="controls" name="typeVisitVet" id="typeVisitVet">
@@ -37,15 +37,16 @@
         </select>
 
         <label >Descripción de la visita</label>
-        <textarea class="controls" name="descriptionVisitVet" id="descriptionVisitVet" placeholder="Ingrese la imagen de la mascota" required></textarea>
+        <textarea class="controls" name="descriptionVisitVet" id="descriptionVisitVet" placeholder="Ingrese la Descripcion de la Visita" required></textarea>
 
         <br>
 
         <input id="visitsave-button"  type="button"  class="botons" value="Registrar"/>
-        <input id="showVisits-button"  type="button"  class="botons" value="Mostrar lista"/>
-        <input id="filtroVisit" type="text" class="controls" placeholder="Filtrar por Nombre de Mascota" disabled="true">
-        <input id="volver-button"  type="button"  class="botons" value="Volver al Inicio"/>
+        <input id="showVisits-button"  type="button"  class="botons" value="Mostrar lista"/><br>
+        <input id="filtroVisit" type="text" class="" placeholder="Filtrar por Nombre de Mascota" disabled="">
+        <input type="button" class="boton-filtro" id="filter" value="Filtrar" disabled><br>
         <button id="edit-button"  type="button"  class="botons" data-toggle="modal" data-target="#myModal">Modificar Dirección o Vecindario</button>
+        <input id="volver-button"  type="button"  class="botons" value="Volver al Inicio"/>
 
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -107,7 +108,7 @@
         <th>Tipo</th>
         <th>Descripcion</th>
         <th>Id Mascota</th>
-        <th>Id Veterinaria</th>
+        <th>Nombre Veterinaria</th>
         </thead>
         <tbody id="table">
 

@@ -1,4 +1,4 @@
-package co.edu.unbosque.resource;
+package co.edu.unbosque.resource.gets;
 
 import co.edu.unbosque.services.OwnerService;
 

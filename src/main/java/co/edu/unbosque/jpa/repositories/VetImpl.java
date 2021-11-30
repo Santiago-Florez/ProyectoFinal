@@ -33,6 +33,13 @@ public class VetImpl implements VetRepository{
     }
 
     @Override
+    public Optional<Vet> findByVetId(Integer vetId) {
+        Vet pet = entityManager.createQuery("SELECT o FROM Vet o WHERE o.vetid = :vetId", Vet.class)
+                .setParameter("vetId", vetId).getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
+    }
+
+    @Override
     public Optional<Vet> findByUsername(String name) {
         Vet pet = entityManager.createQuery("SELECT o FROM Vet o WHERE o.username = :name", Vet.class)
                 .setParameter("name", name).getSingleResult();

@@ -11,6 +11,8 @@ public interface VetRepository {
 
     List<Vet> findAll();
 
+    Optional<Vet> findByVetId(Integer vetId);
+
     Optional<Vet> findByUsername(String name);
 
     Optional<Vet> updateName(String name, String username);
