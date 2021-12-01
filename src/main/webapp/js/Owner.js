@@ -189,3 +189,8 @@ document.getElementById("edit-button").onclick = function (){
 
     }
 }
+document.getElementById("message-button").onclick = function (){
+    var path = window.location.pathname.split("/");
+    var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "message.html";
+    window.location.href = redirect;
+}
