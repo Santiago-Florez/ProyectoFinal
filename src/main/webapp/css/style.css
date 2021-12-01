@@ -31,6 +31,10 @@ body {
   box-shadow: 7px 13px 37px #000;
 }
 
+.form-edit{
+  width: 480px;
+}
+
 .tabla {
   width: 1000px;
   background: #24303c;
@@ -53,10 +57,13 @@ a {
   font-size: 16px;
 }
 
+
 .form-register h4 {
   font-size: 32px;
   margin-bottom: 20px;
 }
+
+
 .form-register h5 {
   font-size: 23px;
   margin-bottom: 50px;
@@ -95,4 +102,9 @@ a {
   padding: 12px;
   color: white;
   font-size: 16px;
+  margin-top: 15px;
+}
+
+.boton-filtro{
+  background: #1f53c5;
 }

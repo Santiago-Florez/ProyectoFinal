@@ -18,7 +18,7 @@ public class Vet extends UserApp implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "vet_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "vet_id", cascade = CascadeType.ALL)
     private List<Visit> visits;
 
 

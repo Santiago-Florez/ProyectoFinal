@@ -8,13 +8,10 @@
     <title>Funcionario</title>
 </head>
 <body>
-    <header>
-        <h1>Ciudadanos de 4 Patas</h1>
-        <h3>Funcionario</h3>
-    </header>
 
     <section class="form-filter">
-
+        <h1>Ciudadanos de 4 Patas</h1>
+        <h3>Funcionario</h3>
         <form class="needs-validation" id="formulario" novalidate>
 
             <label for="neighborhood-user">Filtrar por localidad</label>
@@ -41,28 +38,28 @@
                 <option value="USAQUEN">USAQUEN</option>
                 <option value="USME">USME</option>
             </select>
-            <br>
+            <br><br>
             <label for="species-pet">Filtra por Especie de la Mascota</label>
             <select name="species-pet" id="species-pet">
                 <option></option>
                 <option value="Perro">Perro</option>
                 <option value="Gato">Gato</option>
             </select>
-            <br>
+            <br><br>
             <label for="microchip-pet">Filtra por Microchip</label>
             <select name="microchip-pet" id="microchip-pet">
                 <option value=""></option>
                 <option value="Si">SI</option>
                 <option value="No">NO</option>
             </select>
-            <br>
+            <br><br>
             <label for="esterilizacion-pet">Filtra por Esterilizacion</label>
             <select name="esterilizacion-pet" id="esterilizacion-pet">
                 <option></option>
                 <option value="Si">SI</option>
                 <option value="No">NO</option>
             </select>
-            <br>
+            <br><br>
             <label for="caso-pet">Filtra por Tipo de Caso de la Mascota</label>
             <select name="caso-pet" id="caso-pet">
                 <option value=""></option>
@@ -70,11 +67,11 @@
                 <option value="robada">ROBADA</option>
                 <option value="muerta">MUERTA</option>
             </select>
-            <br>
+            <br><br>
             <label for="nombre-vet">Filtra por Nombre Veterinaria</label>
             <input class="controls" type="text" name="nombre-vet" id="nombre-vet" placeholder="Ingrese el Nombre de la Veterinaria">
-            <br>
-            <label for="visitCase-vet">Filtra por Tipo de Caso de la Mascota</label>
+            <br><br>
+            <label for="visitCase-vet">Filtra por Tipo de Visita de la Mascota</label>
             <select name="caso-pet" id="visitCase-vet">
                 <option value=""></option>
                 <option value="Esterilizacion">Esterilizacion</option>
@@ -84,10 +81,11 @@
                 <option value="Urgencia">Urgencia</option>
                 <option value="Control">Control</option>
             </select>
-            <br>
+            <br><br>
             <input id="save-button"  type="button"  class="boton" value="Mostrar lista"/>
+            <input id="clear-button"  type="button"  class="boton" value="Limpiar Filtro" disabled/>
         </form>
     </section>
-    <script src="./js/scripOffcial.js"></script>
+    <script src="./js/Offcial.js"></script>
 </body>
 </html>

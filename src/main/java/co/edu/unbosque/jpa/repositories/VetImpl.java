@@ -33,6 +33,13 @@ public class VetImpl implements VetRepository{
     }
 
     @Override
+    public Optional<Vet> findByVetId(Integer vetId) {
+        Vet pet = entityManager.createQuery("SELECT o FROM Vet o WHERE o.vetid = :vetId", Vet.class)
+                .setParameter("vetId", vetId).getSingleResult();
+        return pet != null ? Optional.of(pet) : Optional.empty();
+    }
+
+    @Override
     public Optional<Vet> findByUsername(String name) {
         Vet pet = entityManager.createQuery("SELECT o FROM Vet o WHERE o.username = :name", Vet.class)
                 .setParameter("name", name).getSingleResult();
@@ -77,6 +84,21 @@ public class VetImpl implements VetRepository{
             vet.setNeighborhood(neighborhood);
             entityManager.getTransaction().commit();
 
+            return Optional.of(vet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Vet> updateAddressAndNeighborhood(String address, String neighborhood, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Vet vet = entityManager.find(Vet.class, username);
+            vet.setAddress(address);
+            vet.setNeighborhood(neighborhood);
+            entityManager.getTransaction().commit();
             return Optional.of(vet);
         }catch (Exception e){
             e.printStackTrace();

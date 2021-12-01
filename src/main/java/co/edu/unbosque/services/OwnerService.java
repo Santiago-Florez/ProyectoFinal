@@ -1,14 +1,19 @@
 package co.edu.unbosque.services;
 
 import co.edu.unbosque.jpa.entities.Owner;
+import co.edu.unbosque.jpa.entities.Pet;
 import co.edu.unbosque.jpa.repositories.OwnerImpl;
 import co.edu.unbosque.jpa.repositories.OwnerRepository;
+import co.edu.unbosque.jpa.repositories.PetImpl;
 import co.edu.unbosque.resource.pojo.OwnerPOJO;
+import co.edu.unbosque.resource.pojo.PetPOJO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Stateless
@@ -17,7 +22,7 @@ public class OwnerService {
     OwnerRepository ownerRepository;
 
     public Optional<OwnerPOJO> createOwner(OwnerPOJO ownerPOJO){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -32,7 +37,7 @@ public class OwnerService {
             return Optional.of(new OwnerPOJO(persistedOwner.get().getUsername(),
                     persistedOwner.get().getPassword(),
                     persistedOwner.get().getEmail(),
-                    persistedOwner.get().getPerson_id(),
+                    persistedOwner.get().getPersonId(),
                     persistedOwner.get().getName(),
                     persistedOwner.get().getAddress(),
                     persistedOwner.get().getNeighborhood()));
@@ -42,7 +47,7 @@ public class OwnerService {
     }
 
     public Owner findUsername(String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -55,7 +60,7 @@ public class OwnerService {
     }
 
     public OwnerPOJO updateName(String newName, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -68,7 +73,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -77,7 +82,7 @@ public class OwnerService {
     }
 
     public OwnerPOJO updateEmail(String newEmail, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -90,7 +95,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -99,7 +104,7 @@ public class OwnerService {
     }
 
     public OwnerPOJO updateAddress(String newAddress, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -112,7 +117,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
@@ -120,7 +125,7 @@ public class OwnerService {
     }
 
     public OwnerPOJO updateNeighborhood(String newNeighbohood, String username){
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("taller5");
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         ownerRepository = new OwnerImpl(entityManager);
@@ -133,7 +138,7 @@ public class OwnerService {
         OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
                 owner.getPassword(),
                 owner.getEmail(),
-                owner.getPerson_id(),
+                owner.getPersonId(),
                 owner.getName(),
                 owner.getAddress(),
                 owner.getNeighborhood());
