@@ -17,17 +17,17 @@ public interface OfficialRepository {
 
     Optional<Official> updateEmail(String email, String username);
 
-    List<Owner> findOwnerLocalidad(String localidad);
+    List<Owner> findOwnerLocalidad();
 
-    List<Pet> findPetBySpecies(String specie);
+    List<Pet> findPetBySpecies();
 
     List<Pet> findPetByStatusMicrochip();
 
-    List<Visit> findPetByStatusSterilization(String sterilization);
+    List<Visit> findPetByStatusSterilization();
 
-    List<PetCase> findCaseByType(String type);
+    List<PetCase> findCaseByType();
 
-    List<Visit> findByVetName(String vetName);
+    List<Visit> findByVetName();
 
-    List<Visit> findVisitByType(String type);
+    List<Visit> findVisitByType();
 }

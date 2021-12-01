@@ -19,6 +19,12 @@ document.getElementById("visitsave-button").onclick = function (){
     if (visitId === "" || createdAt === "" || typeVisit === "" || description === "" || vetId === "" || petId === ""){
         var elementP = document.getElementById("MensajeError").innerHTML = "Debe ingresar datos de la Visita para registrarla";
     }else{
+        //Aqui va para comprobar el tipo
+        //if (typeVisit === "microchip"){
+            //fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visitsList/1")
+              //  .then(response => response.json())
+              //  .then(data => console.log(data))
+        //}
         fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visits/", {
             method: "POST",
             body: JSON.stringify(visitJSON), // enviar el JSON para la API
@@ -108,7 +114,8 @@ document.getElementById("edit-button").onclick = function (){
         var cookies = document.cookie.split("; ")
         console.log(cookies)
         var cookieusername
-        cookieusername = cookies[0].split("=")
+        cookieusername = cookies[1].split("=")
+        console.log(cookieusername)
         if (newAddress === "" && newNeighborhood === ""){
             modal.className ="modal fade";
         }else if(newAddress != "" && newNeighborhood === ""){
@@ -164,11 +171,39 @@ document.getElementById("edit-button").onclick = function (){
                             }
                         })
                             .then(data =>{
-                                alert("Se actualizo la Dirección")
+                                alert("Se actualizo la Localidad")
+                            })
+                    }
+                })
+        }else if (newAddress != "" && newNeighborhood != "") {
+            var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let username = cookieusername[1];
+                    let address = document.getElementById("newaddressVet").value;
+                    let localidad = document.getElementById("newlocalidadVet").value;
+                    if (data.password === passwordConfirm) {
+                        let vetJSON = {
+                            "username": username,
+                            "password": data.password,
+                            "email": data.email,
+                            "name": data.name,
+                            "address": address,
+                            "neighborhood": localidad
+                        };
+                        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/vet/address/neighborhood", {
+                            method: "PUT",
+                            body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(data => {
+                                alert("Se actualizo la Dirección y la Localidad")
                             })
                     }
                 })
         }
-
     }
 }

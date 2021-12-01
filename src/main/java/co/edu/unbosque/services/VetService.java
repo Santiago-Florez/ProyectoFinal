@@ -115,4 +115,25 @@ public class VetService {
 
         return vetPOJO;
     }
+
+    public VetPOJO updateAddressAndNeighborhood(String address, String neighborhood, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetImpl(entityManager);
+        vetRepository.updateAddressAndNeighborhood(address,neighborhood,username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Vet vet = findUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername(),
+                vet.getPassword(),
+                vet.getEmail(),
+                vet.getName(),
+                vet.getAddress(),
+                vet.getNeighborhood());
+
+        return vetPOJO;
+    }
 }

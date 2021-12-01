@@ -40,4 +40,11 @@ public class VisitImpl implements VisitRepository{
                 .setParameter("petId", petId).getSingleResult();
         return pet != null ? Optional.of(pet) : Optional.empty();
     }
+
+    @Override
+    public Optional<Visit> findVisitPetId(Integer petId) {
+        Visit visit = entityManager.createQuery("SELECT vi FROM Visit vi WHERE vi.pet_id.petId = :petId", Visit.class)
+                .setParameter("petId", petId).getSingleResult();
+        return visit != null ? Optional.of(visit) : Optional.empty();
+    }
 }

@@ -52,12 +52,12 @@ public class OfficialService {
         return persistedOwner;
     }
 
-    public List<OwnerPOJO> findOwnerLocalidad(String localidad){
+    public List<OwnerPOJO> findOwnerLocalidad(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<Owner> persistedOwner = officialRepository.findOwnerLocalidad(localidad);
+        List<Owner> persistedOwner = officialRepository.findOwnerLocalidad();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -76,12 +76,12 @@ public class OfficialService {
         return ownerPOJOS;
     }
 
-    public List<PetPOJO> findBySpecie(String specie){
+    public List<PetPOJO> findBySpecie(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<Pet> pets = officialRepository.findPetBySpecies(specie);
+        List<Pet> pets = officialRepository.findPetBySpecies();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -116,12 +116,12 @@ public class OfficialService {
         return petPOJOS;
     }
 
-    public List<VisitPOJO> findPetByStatusSterilization(String sterilization){
+    public List<VisitPOJO> findPetByStatusSterilization(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<Visit> visits = officialRepository.findPetByStatusSterilization(sterilization);
+        List<Visit> visits = officialRepository.findPetByStatusSterilization();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -136,12 +136,12 @@ public class OfficialService {
         return visitPOJOS;
     }
 
-    public List<PetCasePOJO> findCaseByType(String type){
+    public List<PetCasePOJO> findCaseByType(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<PetCase> petCases = officialRepository.findCaseByType(type);
+        List<PetCase> petCases = officialRepository.findCaseByType();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -154,12 +154,12 @@ public class OfficialService {
         return petCasePOJOS;
     }
 
-    public List<VisitPOJO> findByVetName(String vetName){
+    public List<VisitPOJO> findByVetName(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<Visit> visits = officialRepository.findByVetName(vetName);
+        List<Visit> visits = officialRepository.findByVetName();
 
         entityManager.close();
         entityManagerFactory.close();
@@ -174,12 +174,12 @@ public class OfficialService {
         return visitPOJOS;
     }
 
-    public List<VisitPOJO> findVisitByType(String type){
+    public List<VisitPOJO> findVisitByType(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         officialRepository = new OfficialImpl(entityManager);
-        List<Visit> visits = officialRepository.findVisitByType(type);
+        List<Visit> visits = officialRepository.findVisitByType();
 
         entityManager.close();
         entityManagerFactory.close();

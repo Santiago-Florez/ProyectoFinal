@@ -20,4 +20,6 @@ public interface VetRepository {
     Optional<Vet> updateAddress(String address, String username);
 
     Optional<Vet> updateNeighborhood(String neighborhood, String username);
+
+    Optional<Vet> updateAddressAndNeighborhood(String address,String neighborhood, String username);
 }

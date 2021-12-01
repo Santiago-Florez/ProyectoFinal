@@ -66,6 +66,19 @@ public class VisitService {
         return persistedPet;
     }
 
+    public Visit findVisitPetId(Integer petId){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        visitRepository = new VisitImpl(entityManager);
+        Visit visit = visitRepository.findVisitPetId(petId).get();
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return visit;
+    }
+
     public List<VisitPOJO> findAll(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

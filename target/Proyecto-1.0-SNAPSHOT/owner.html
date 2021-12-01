@@ -20,7 +20,7 @@
             <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
             <br>
             <label for="microchipPet-Owner">Microchip:</label>
-            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip" required/>
+            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
             <br>
             <label for="petName-Owner">Nombre de la mascota:</label>
             <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
@@ -59,6 +59,12 @@
             <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
 
             <input id="petsave-button" type="submit"  class="boton" value="Registrar"/>
+
+            <br>
+            <p style="color: tomato;" id="MensajeError"></p>
+        </form>
+
+        <form>
             <input id="show-button"  type="button"  class="botons" value="Ver Mi(s) Mascota(s)"/>
             <input id="back-button"  type="button"  class="botons" value="Volver al Inicio"/>
             <button id="edit-button"  type="button"  class="botons" data-toggle="modal" data-target="#myModal">Modificar Dirección o Vecindario</button>
@@ -114,8 +120,6 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <p style="color: tomato;" id="MensajeError"></p>
         </form>
 
         <table border="1px" class="controls">

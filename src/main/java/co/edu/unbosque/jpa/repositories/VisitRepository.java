@@ -12,5 +12,7 @@ public interface VisitRepository {
 
     List<Visit> findAll();
 
-    public Optional<Pet> findPetId(Integer petId);
+    Optional<Pet> findPetId(Integer petId);
+
+    Optional<Visit> findVisitPetId(Integer petId);
 }

@@ -32,4 +32,17 @@ public class GetVisits {
             return Response.status(404).build();
         }
     }
+
+    @GET
+    @Path("visitPetId/{petId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getVisitPetId(@PathParam("petId") Integer petId){
+        Optional persistedVisit = Optional.of(new VisitService().findVisitPetId(petId));
+
+        if (persistedVisit.isPresent()){
+            return Response.status(Response.Status.OK).entity(persistedVisit.get()).build();
+        }else{
+            return Response.status(404).build();
+        }
+    }
 }

@@ -90,4 +90,19 @@ public class VetImpl implements VetRepository{
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Vet> updateAddressAndNeighborhood(String address, String neighborhood, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Vet vet = entityManager.find(Vet.class, username);
+            vet.setAddress(address);
+            vet.setNeighborhood(neighborhood);
+            entityManager.getTransaction().commit();
+            return Optional.of(vet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
 }

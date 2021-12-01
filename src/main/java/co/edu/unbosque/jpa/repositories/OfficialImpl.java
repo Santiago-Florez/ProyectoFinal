@@ -70,15 +70,13 @@ public class OfficialImpl implements OfficialRepository{
     }
 
     @Override
-    public List<Owner> findOwnerLocalidad(String localidad) {
-        return entityManager.createQuery("SELECT ow FROM Owner ow WHERE ow.neighborhood = :localidad", Owner.class)
-                .setParameter("localidad", localidad).getResultList();
+    public List<Owner> findOwnerLocalidad() {
+        return entityManager.createQuery("from Owner ", Owner.class).getResultList();
     }
 
     @Override
-    public List<Pet> findPetBySpecies(String specie) {
-        return entityManager.createQuery("SELECT p FROM Pet p WHERE p.species = :specie", Pet.class)
-                .setParameter("specie", specie).getResultList();
+    public List<Pet> findPetBySpecies() {
+        return entityManager.createQuery("from Pet ", Pet.class).getResultList();
     }
 
     @Override
@@ -87,25 +85,22 @@ public class OfficialImpl implements OfficialRepository{
     }
 
     @Override
-    public List<Visit> findPetByStatusSterilization(String sterilization) {
+    public List<Visit> findPetByStatusSterilization() {
         return entityManager.createQuery("from Visit", Visit.class).getResultList();
     }
 
     @Override
-    public List<PetCase> findCaseByType(String type) {
-        return entityManager.createQuery("SELECT pc FROM PetCase pc WHERE pc.type = :type", PetCase.class)
-                .setParameter("type", type).getResultList();
+    public List<PetCase> findCaseByType() {
+        return entityManager.createQuery("from PetCase ", PetCase.class).getResultList();
     }
 
     @Override
-    public List<Visit> findByVetName(String vetName) {
-        return entityManager.createQuery("SELECT v FROM Visit v WHERE v.vet_id.name = :vetName", Visit.class)
-                .setParameter("vetName", vetName).getResultList();
+    public List<Visit> findByVetName() {
+        return entityManager.createQuery("from Visit", Visit.class).getResultList();
     }
 
     @Override
-    public List<Visit> findVisitByType(String type) {
-        return entityManager.createQuery("SELECT v FROM Visit v WHERE v.type = :type", Visit.class)
-                .setParameter("type", type).getResultList();
+    public List<Visit> findVisitByType() {
+        return entityManager.createQuery("from Visit", Visit.class).getResultList();
     }
 }

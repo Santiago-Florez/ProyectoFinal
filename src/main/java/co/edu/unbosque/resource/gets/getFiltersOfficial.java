@@ -14,10 +14,10 @@ import java.util.Optional;
 public class getFiltersOfficial {
 
     @GET
-    @Path("/ownerLocalidad/{ownerLocalidad}")
+    @Path("/ownerLocalidad/}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response ownersNeighborhood(@PathParam("ownerLocalidad") String localidad){
-        Optional persistedownerNeighborhood = Optional.of(new OfficialService().findOwnerLocalidad(localidad));
+    public Response ownersNeighborhood( String localidad){
+        Optional persistedownerNeighborhood = Optional.of(new OfficialService().findOwnerLocalidad());
         if (persistedownerNeighborhood.isPresent()){
             return Response.status(Response.Status.OK).entity(persistedownerNeighborhood.get()).build();
         }else{
@@ -26,10 +26,10 @@ public class getFiltersOfficial {
     }
 
     @GET
-    @Path("/petSpecies/{petSpecies}")
+    @Path("/petSpecies")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response petSpecies(@PathParam("petSpecies") String specie){
-        Optional persistedpetSpecies = Optional.of(new OfficialService().findBySpecie(specie));
+    public Response petSpecies(){
+        Optional persistedpetSpecies = Optional.of(new OfficialService().findBySpecie());
         if (persistedpetSpecies.isPresent()){
             return Response.status(Response.Status.OK).entity(persistedpetSpecies.get()).build();
         }else{
@@ -50,10 +50,10 @@ public class getFiltersOfficial {
     }
 
     @GET
-    @Path("/sterilization/{sterilization}")
+    @Path("/sterilization")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response sterilization(@PathParam("sterilization") String sterilization){
-        Optional persitedsterilization = Optional.of(new OfficialService().findPetByStatusSterilization(sterilization));
+    public Response sterilization(){
+        Optional persitedsterilization = Optional.of(new OfficialService().findPetByStatusSterilization());
         if (persitedsterilization.isPresent()){
             return Response.status(Response.Status.OK).entity(persitedsterilization.get()).build();
         }else{
@@ -62,10 +62,10 @@ public class getFiltersOfficial {
     }
 
     @GET
-    @Path("/caseType/{caseType}")
+    @Path("/caseType")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response caseType(@PathParam("caseType") String caseType){
-        Optional persitedcaseType = Optional.of(new OfficialService().findCaseByType(caseType));
+    public Response caseType(){
+        Optional persitedcaseType = Optional.of(new OfficialService().findCaseByType());
         if (persitedcaseType.isPresent()){
             return Response.status(Response.Status.OK).entity(persitedcaseType.get()).build();
         }else{
@@ -74,10 +74,10 @@ public class getFiltersOfficial {
     }
 
     @GET
-    @Path("/vetName/{vetName}")
+    @Path("/vetName")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response vetName(@PathParam("vetName") String vetName){
-        Optional persistedvetName = Optional.of(new OfficialService().findByVetName(vetName));
+    public Response vetName(){
+        Optional persistedvetName = Optional.of(new OfficialService().findByVetName());
         if (persistedvetName.isPresent()){
             return Response.status(Response.Status.OK).entity(persistedvetName.get()).build();
         }else{
@@ -86,10 +86,10 @@ public class getFiltersOfficial {
     }
 
     @GET
-    @Path("/visitType/{visitType}")
+    @Path("/visitType")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response visitType(@PathParam("visitType") String visitType){
-        Optional persistedvisitName = Optional.of(new OfficialService().findVisitByType(visitType));
+    public Response visitType(){
+        Optional persistedvisitName = Optional.of(new OfficialService().findVisitByType());
         if (persistedvisitName.isPresent()){
             return Response.status(Response.Status.OK).entity(persistedvisitName.get()).build();
         }else{
