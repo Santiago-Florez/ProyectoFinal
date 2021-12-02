@@ -9,82 +9,100 @@
 </head>
 <body>
 
-    <section class="form-filter">
-        <h1>Ciudadanos de 4 Patas</h1>
-        <h3>Funcionario</h3>
+    <section class="form-official">
+        <h4>Ciudadanos de 4 Patas</h4>
+        <h4>Funcionario</h4>
         <form class="needs-validation" id="formulario" novalidate>
 
-            <label for="neighborhood-user">Filtrar por localidad</label>
-            <select name="neighborhood-user" id="neighborhood-user">
-                <option value=""></option>
-                <option value="A. Nariño">A. NARINO</option>
-                <option value="B. UNIDOS">B. UNIDOS</option>
-                <option value="BOSA">BOSA</option>
-                <option value="C. BOLIVAR">C. BOLIVAR</option>
-                <option value="CHAPINERO">CHAPINERO</option>
-                <option value="ENGATIVA">ENGATIVA</option>
-                <option value="FONTIBON">FONTIBON</option>
-                <option value="KENNEDY">KENNEDY</option>
-                <option value="LA CANDELARIA">LA CANDELARIA</option>
-                <option value="LOS MARTIRES">LOS MARTIRES</option>
-                <option value="P. ARANDA">P. ARANDA</option>
-                <option value="R. CRISTOBAL">R. URIBE</option>
-                <option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
-                <option value="SANTA FE">SANTA FE</option>
-                <option value="SUBA">SUBA</option>
-                <option value="SUMAPAZ">SUMAPAZ</option>
-                <option value="TEUSAQUILLO">TEUSAQUILLO</option>
-                <option value="TUNJUELITO">TUNJUELITO</option>
-                <option value="USAQUEN">USAQUEN</option>
-                <option value="USME">USME</option>
-            </select>
+            <h3>Localidad</h3>
+            <table class="tablaOfficial" border="1">
+                <thead>
+                <th>A. NARINO</th>
+                <th>B. UNIDOS</th>
+                <th>BOSA</th>
+                <th>C. BOLIVAR</th>
+                <th>CHAPINERO</th>
+                <th>ENGATIVA</th>
+                <th>FONTIBON</th>
+                <th>KENNEDY</th>
+                <th>LA CANDELARIA</th>
+                <th>LOS MARTIRES</th>
+                <th>P. ARANDA</th>
+                <th>R. URIBE</th>
+                <th>SAN CRISTOBAL</th>
+                <th>SANTA FE</th>
+                <th>SUBA</th>
+                <th>SUMAPAZ</th>
+                <th>TEUSAQUILLO</th>
+                <th>TUNJUELITO</th>
+                <th>USAQUEN</th>
+                <th>USME</th>
+                </thead>
+                <tbody id="tableLocalidad"></tbody>
+            </table>
             <br><br>
-            <label for="species-pet">Filtra por Especie de la Mascota</label>
-            <select name="species-pet" id="species-pet">
-                <option></option>
-                <option value="Perro">Perro</option>
-                <option value="Gato">Gato</option>
-            </select>
+            <h3>Especie de la Mascota</h3>
+            <table class="tablaOfficial">
+                <thead>
+                <th value="Perro">Perro</th>
+                <th value="Gato">Gato</th>
+                </thead>
+                <tbody id="tableSpeciePet"></tbody>
+            </table>
             <br><br>
-            <label for="microchip-pet">Filtra por Microchip</label>
-            <select name="microchip-pet" id="microchip-pet">
-                <option value=""></option>
-                <option value="Si">SI</option>
-                <option value="No">NO</option>
-            </select>
+            <h3>Microchip</h3>
+            <table class="tablaOfficial">
+                <thead>
+                <th value="Si">SI</th>
+                <th value="No">NO</th>
+                </thead>
+                <tbody id="tableMicrochip"></tbody>
+            </table>
             <br><br>
-            <label for="esterilizacion-pet">Filtra por Esterilizacion</label>
-            <select name="esterilizacion-pet" id="esterilizacion-pet">
-                <option></option>
-                <option value="Si">SI</option>
-                <option value="No">NO</option>
-            </select>
+            <h3>Esterilizacion</h3>
+            <table class="tablaOfficial">
+                <thead>
+                <th>SI</th>
+                <th>NO</th>
+                </thead>
+                <tbody id="tableEsterilizacion"></tbody>
+            </table>
             <br><br>
-            <label for="caso-pet">Filtra por Tipo de Caso de la Mascota</label>
-            <select name="caso-pet" id="caso-pet">
-                <option value=""></option>
-                <option value="perdida">PERDIDA</option>
-                <option value="robada">ROBADA</option>
-                <option value="muerta">MUERTA</option>
-            </select>
+            <h3>Tipo de Caso de la Mascota</h3>
+            <table class="tablaOfficial">
+                <thead>
+                <th>PERDIDA</th>
+                <th>ROBADA</th>
+                <th>MUERTA</th>
+                </thead>
+                <tbody id="tableCasoPet"></tbody>
+            </table>
             <br><br>
-            <label for="nombre-vet">Filtra por Nombre Veterinaria</label>
-            <input class="controls" type="text" name="nombre-vet" id="nombre-vet" placeholder="Ingrese el Nombre de la Veterinaria">
+            <h3>Nombre Veterinaria</h3>
+            <input type="text" name="nombre-vet" id="nombre-vet" placeholder="Ingrese el Nombre de la Veterinaria">
+            <table class="tablaOfficial">
+                <thead>
+                <th>Nombre Veterinaria</th>
+                </thead>
+                <tbody id="tableNameVet"></tbody>
+            </table>
             <br><br>
-            <label for="visitCase-vet">Filtra por Tipo de Visita de la Mascota</label>
-            <select name="caso-pet" id="visitCase-vet">
-                <option value=""></option>
-                <option value="Esterilizacion">Esterilizacion</option>
-                <option value="implantarMicro">Implantar Microchip</option>
-                <option value="Vacunacion">Vacunacion</option>
-                <option value="Desparacitacion">Desparacitacion</option>
-                <option value="Urgencia">Urgencia</option>
-                <option value="Control">Control</option>
-            </select>
+            <h3>Tipo de Visita de la Mascota</h3>
+            <table class="tablaOfficial">
+                <thead>
+                <th>Esterilizacion</th>
+                <th>Implantar Microchip</th>
+                <th>Vacunacion</th>
+                <th>Desparacitacion</th>
+                <th>Urgencia</th>
+                <th>Control</th>
+                </thead>
+                <tbody id="tableVisitasVet"></tbody>
+            </table>
             <br><br>
             <input id="message-Button"  type="button"  class="botons" value="Chat"/><br>
-            <input id="save-button"  type="button"  class="boton" value="Mostrar lista"/>
-            <input id="clear-button"  type="button"  class="boton" value="Limpiar Filtro" disabled/>
+            <input id="show-button"  type="button"  class="boton" value="Mostrar lista"/>
+            <input id="back-button"  type="button"  class="boton" value="Volver Al Inicio"/>
         </form>
     </section>
     <script src="./js/Offcial.js"></script>

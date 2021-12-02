@@ -1,3 +1,20 @@
+let officialJSON = {
+    "username":"admin",
+    "password":123,
+    "email":"admin@hotmail.com",
+    "name":"Admin",
+    "personId": 1
+}
+
+fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/officials",{
+    method:"POST",
+    body: JSON.stringify(officialJSON), // enviar el JSON para la API
+    headers:{
+        'Content-Type': 'application/json'
+    }
+})
+    .then(data => alert("Para ingresar como Funcionario: \nUsuario:admin\nContraseña:123"))
+
 document.getElementById("registrar-button").onclick = function () {
     var roleChoosen = document.getElementById("roleReg").value;
     console.log(roleChoosen);

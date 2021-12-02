@@ -11,6 +11,24 @@ section{
   display: grid;
 }
 
+.form-official {
+  width: auto;
+  background: #24303c;
+  padding: 30px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 4px;
+  font-family: "calibri";
+  color: white;
+  box-shadow: 7px 13px 37px #000;
+}
+
+h4{
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+
 #formImg{
   background: #24303c;
 }
@@ -43,7 +61,7 @@ section{
   width: 480px;
 }
 
-.tabla {
+.tablaOfficial {
   width: 1000px;
   background: #24303c;
   padding: 30px;
