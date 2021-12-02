@@ -60,13 +60,20 @@ document.getElementById("back-button").onclick = function (){
 
 document.getElementById("show-button").onclick = function (){
     var rowId = 0;
-    var table;
+    var table = document.getElementById("table");
     var tableTr;
     var cookies = document.cookie.split(";")
     var cookieId
     for (let i = 0; i < cookies.length; i++){
         if (cookies[i].length == 5 || cookies[i].length == 4){
             cookieId = cookies[i].split("=")
+        }
+    }
+
+    if (table.childElementCount !== 0){
+        let trs = table.childElementCount
+        for(let i = 1; i <= trs;i++){
+            document.getElementById("row"+i).remove()
         }
     }
 
@@ -266,7 +273,7 @@ document.getElementById("savePetCase").onclick = function () {
 
 document.getElementById("verHistoriaC").onclick = function (){
     var rowId = 0;
-    var table
+    let table =document.getElementById("tableVisits")
     let tableTr
     let tdVisitId
     let tdCreatedAt
@@ -282,6 +289,16 @@ document.getElementById("verHistoriaC").onclick = function (){
             cookieId = cookies[i].split("=")
         }
     }
+    if (table.childElementCount !== 0) {
+        console.log("here")
+        let trs = table.childElementCount
+        for (let i = 1; i <= trs; i++) {
+            console.log(table.childElementCount)
+            document.getElementById("row" + i).remove()
+        }
+    }
+    console.log(table.childElementCount)
+
     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
         .then(response => response.json())
         .then(data => {
@@ -290,9 +307,9 @@ document.getElementById("verHistoriaC").onclick = function (){
                     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visitsList")
                         .then(response => response.json())
                         .then(datos => {
-                            console.log(datos)
                             for (let i = 0; i < datos.length; i++) {
                                 if (datos[i].petId === +namePet && data[k].ownerId === +cookieId[1]) {
+                                    rowId += 1;
                                     table = document.getElementById("tableVisits");
                                     tableTr = document.createElement("tr");
                                     tableTr.setAttribute("id", "row" + rowId);

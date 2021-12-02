@@ -156,7 +156,7 @@ document.getElementById("showVisits-button").onclick = function (){
     let userCookie
     if (cookies.length === 3){
         userCookie = cookies[1].length
-    }else{
+    }else {
         userCookie = cookies[0].length
     }
     var cookieId
