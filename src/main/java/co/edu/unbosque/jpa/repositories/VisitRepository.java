@@ -14,5 +14,5 @@ public interface VisitRepository {
 
     Optional<Pet> findPetId(Integer petId);
 
-    Optional<Visit> findVisitPetId(Integer petId);
+    List<Visit> findVisitPetId(String namePet);
 }

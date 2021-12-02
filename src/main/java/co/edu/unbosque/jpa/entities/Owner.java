@@ -22,7 +22,7 @@ public class Owner extends UserApp implements Serializable {
     @Column(name = "neighborhood")
     private String neighborhood;
 
-    @OneToMany(mappedBy = "ownerId",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerId",cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<>();
 
     public Owner() {}

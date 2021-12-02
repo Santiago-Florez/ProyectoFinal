@@ -66,17 +66,24 @@ public class VisitService {
         return persistedPet;
     }
 
-    public Visit findVisitPetId(Integer petId){
+    public List<VisitPOJO> findVisitPetId(String namePet){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         visitRepository = new VisitImpl(entityManager);
-        Visit visit = visitRepository.findVisitPetId(petId).get();
+        List<Visit> visits = visitRepository.findVisitPetId(namePet);
 
         entityManager.close();
         entityManagerFactory.close();
 
-        return visit;
+        List<VisitPOJO> visitPOJOS = new ArrayList<>();
+        for (Visit visit: visits){
+            visitPOJOS.add(new VisitPOJO(visit.getVisit_id(), visit.getCreated_at(),
+                    visit.getType(), visit.getDescription(),
+                    visit.getVet_id().getUsername(), visit.getPet_id().getPetId()));
+        }
+
+        return visitPOJOS;
     }
 
     public List<VisitPOJO> findAll(){

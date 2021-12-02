@@ -20,7 +20,7 @@
             <input class="controls" type="number" name="petId-Owner" id="petId-Owner" placeholder="Ingrese el Id" required/>
             <br>
             <label for="microchipPet-Owner">Microchip:</label>
-            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip" required/>
+            <input class="controls" type="number" name="microchipPet-Owner" id="microchipPet-Owner" placeholder="Ingrese el Microchip"/>
             <br>
             <label for="petName-Owner">Nombre de la mascota:</label>
             <input class="controls" type="text" name="petName-Owner" id="petName-Owner" placeholder="Ingrese el nombre de la mascota" required/>
@@ -57,13 +57,19 @@
             <br>
             <label for="ownerId-Owner">Id del Propietario:</label>
             <input class="controls" type="text" name="ownerId-Owner" id="ownerId-Owner" placeholder="Ingrese el id del propietario" required/>
-
             <input id="petsave-button" type="submit"  class="boton" value="Registrar"/>
+            <br>
+            <p style="color: tomato;" id="MensajeError"></p>
+        </form>
+
+        <form>
             <input id="show-button"  type="button"  class="botons" value="Ver Mi(s) Mascota(s)"/>
+            <br>
+            <input id="message-button"  type="button"  class="botons" value="Chat"/>
             <input id="back-button"  type="button"  class="botons" value="Volver al Inicio"/>
             <button id="edit-button"  type="button"  class="botons" data-toggle="modal" data-target="#myModal">Modificar Dirección o Vecindario</button>
 
-            <div class="modal fade show" id="myModal" role="dialog">
+            <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -114,10 +120,8 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <p style="color: tomato;" id="MensajeError"></p>
         </form>
-
+        <br>
         <table border="1px" class="controls">
             <thead>
                 <th>Microchip</th>
@@ -129,10 +133,86 @@
                 <th>Imagen</th>
             </thead>
             <tbody id="table">
-
             </tbody>
-
         </table>
+            <button id="editImg-button"  type="button"  class="botons" data-toggle="modal" data-target="#imgModal">Modificar Foto de Su Mascota</button>
+
+            <div class="modal fade" id="imgModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Actualizar Imagen de Su Mascota</h4>
+                        </div>
+                        <div class="modal-body">
+                            <section class="form-edit">
+                                <h4>Ciudadanos de 4 patas</h4>
+                                <form class="needs-validation" id="formImg" action="img-servlet" method="post" enctype="multipart/form-data">
+                                    <label >Nueva Imagen:</label>
+                                    <input class="controls" type="file" name="addressVet" id="newImgPet"/>
+                                    <br>
+                                    <label >Id de la Mascota:</label>
+                                    <input class="controls" placeholder="Ingrese el Id de la Mascota" type="number" name="addressVet" id="idPet"/>
+                                    <br><br>
+                                    <input type="button" id="guardarImagen" class="botons" value="Guardar">
+                                    <input id="actualizarImgPet" type="submit"  class="botons" value="Actualizar" disabled/>
+                                    <p id="Mensajes"></p>
+                                </form>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section class="form-register">
+        <h2>Crear Caso de la Mascota</h2>
+        <form>
+            <label for="caseId">Id del Caso Actual de Su Mascota</label>
+            <input id="caseId" type="text" class="controls" placeholder="Id del Caso">
+            <label for="fechaCracionCaso">Fecha de creacion del caso Caso</label>
+            <input id="fechaCracionCaso" type="date" class="controls" placeholder="fecha del caso">
+            <label for="tipoDeCaso">Seleccione el Tipo de Caso de Su Mascota</label>
+            <select id="tipoDeCaso" class="controls">
+                <option value=""></option>
+                <option value="perdida">Perdida</option>
+                <option value="robo">Robo</option>
+                <option value="fallecimiento">Falleciemiento</option>
+            </select>
+            <label for="descripcionCaso">Descripcion del Caso de su Mascota</label>
+            <input id="descripcionCaso" class="controls" type="text" placeholder="Descripcion del Caso">
+            <label for="idMascotaCaso">Id de la Mascota</label>
+            <input id="idMascotaCaso" class="controls" type="text" placeholder="Id de la Mascota">
+            <input type="button" class="botons" value="Guardar Caso" id="savePetCase">
+            <p style="color: tomato;" id="MensajeErrorCase"></p>
+        </form>
+    </section>
+
+    <section class="form-register">
+        <h2>Historia Clinica de la Mascota</h2>
+        <form>
+            <label for="namePet">Ingrese el Nombre de su Mascota</label>
+            <input type="text" class="controls" id="namePet" placeholder="Ingrese nombre de Su Mascota">
+            <input type="button" class="botons" id="verHistoriaC" value="Ver Historia Clinica Mascota">
+        </form>
+
+        <table border="1px" class="controls">
+            <thead>
+            <th>Id Visita</th>
+            <th>Fecha de la Visita</th>
+            <th>Tipo de Visita</th>
+            <th>Descripcion</th>
+            <th>Id Mascota</th>
+            <th>Nombre Veterinaria</th>
+            </thead>
+            <tbody id="tableVisits">
+            </tbody>
+        </table>
+
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

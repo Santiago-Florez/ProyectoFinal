@@ -35,17 +35,7 @@ public class PetResource {
     public Response modify(@PathParam("pet") String pet, @PathParam("update") String update, PetPOJO petPOJO){
         Optional<PetPOJO> persistedPet = null;
 
-        if(pet.equals("pet") && update.equals("name")){
-            persistedPet = Optional.of(new PetService().updateName(petPOJO.getName(), petPOJO.getPet_id()));
-        }else if(pet.equals("pet") && update.equals("species")){
-            persistedPet = Optional.of(new PetService().updateSpecies(petPOJO.getSpecies(), petPOJO.getPet_id()));
-        }else if(pet.equals("pet") && update.equals("race")){
-            persistedPet = Optional.of(new PetService().updateRace(petPOJO.getRace(), petPOJO.getPet_id()));
-        }else if(pet.equals("pet") && update.equals("size")){
-            persistedPet = Optional.of(new PetService().updateSize(petPOJO.getSize(), petPOJO.getPet_id()));
-        }else if(pet.equals("pet") && update.equals("sex")){
-            persistedPet = Optional.of(new PetService().updateSex(petPOJO.getSex(), petPOJO.getPet_id()));
-        }else if(pet.equals("pet") && update.equals("picture")){
+        if(pet.equals("pet") && update.equals("picture")){
             persistedPet = Optional.of(new PetService().updatePicture(petPOJO.getPicture(), petPOJO.getPet_id()));
         }else{
             persistedPet = null;

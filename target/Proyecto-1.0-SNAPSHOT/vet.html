@@ -37,7 +37,7 @@
         </select>
 
         <label for="newMicroShip">Ingrese el Microchip</label>
-        <input id="newMicroShip" type="text" class="controls" placeholder="Nuevo Microchip para la Mascota" disabled>
+        <input id="newMicroShip" type="text" class="controls" placeholder="Nuevo Microchip para la Mascota">
 
         <label >Descripción de la visita</label>
         <textarea class="controls" name="descriptionVisitVet" id="descriptionVisitVet" placeholder="Ingrese la Descripcion de la Visita" required></textarea>
@@ -45,9 +45,11 @@
         <br>
 
         <input id="visitsave-button"  type="button"  class="botons" value="Registrar"/>
-        <input id="showVisits-button"  type="button"  class="botons" value="Mostrar lista"/><br>
+        <input id="showVisits-button"  type="button"  class="botons" value="Mostrar lista"/><br><br>
         <input id="filtroVisit" type="text" class="" placeholder="Filtrar por Nombre de Mascota" disabled="">
         <input type="button" class="boton-filtro" id="filter" value="Filtrar" disabled><br>
+        <p id="mensajeFiltro"></p>
+        <input id="messages-button"  type="button"  class="botons" value="Chat"/>
         <button id="edit-button"  type="button"  class="botons" data-toggle="modal" data-target="#myModal">Modificar Dirección o Vecindario</button>
         <input id="volver-button"  type="button"  class="botons" value="Volver al Inicio"/>
 

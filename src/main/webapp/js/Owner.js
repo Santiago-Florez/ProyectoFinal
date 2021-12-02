@@ -62,7 +62,6 @@ document.getElementById("show-button").onclick = function (){
     var rowId = 0;
     var table;
     var tableTr;
-    console.log(document.cookie)
     var cookies = document.cookie.split(";")
     var cookieId
     for (let i = 0; i < cookies.length; i++){
@@ -74,8 +73,6 @@ document.getElementById("show-button").onclick = function (){
     fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
         .then(response => response.json())
         .then(data => {
-            console.log("Datos " + data)
-            console.log(cookieId)
             data.map((element) => {
                 rowId += 1;
                 table = document.getElementById("table");
@@ -88,7 +85,6 @@ document.getElementById("show-button").onclick = function (){
                 let tdSize = document.createElement("td")
                 let tdSex = document.createElement("td")
                 let tdPicture = document.createElement("img")
-                console.log("Owner Id " + element.ownerId)
                 if(element.ownerId == +cookieId[1]){
                     tdMicrochip.innerHTML = element.microchip;
                     tdName.innerHTML = element.name;
@@ -97,7 +93,6 @@ document.getElementById("show-button").onclick = function (){
                     tdSize.innerHTML = element.size;
                     tdSex.innerHTML = element.sex;
                     var img = element.picture.substring(12)
-                    console.log("Img " + img)
                     tdPicture.setAttribute("src", "./imgsPets/"+ img)
                     tdPicture.setAttribute("width", "150px");
                     tableTr.appendChild(tdMicrochip)
@@ -189,8 +184,143 @@ document.getElementById("edit-button").onclick = function (){
 
     }
 }
+
+document.getElementById("editImg-button").onclick = function (){
+    let modal = document.getElementById("imgModal");
+    modal.className ="modal fade show";
+    document.getElementById("guardarImagen").onclick = function (){
+
+        let newImg = document.getElementById("newImgPet").value
+        let petId = document.getElementById("idPet").value
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(+petId)
+                    for (let i = 0; i < data.length; i++) {
+                        console.log(data[i])
+                        console.log(+petId === data[i].pet_id)
+                        if (+petId === data[i].pet_id) {
+                            alert("GG")
+                            var newPetJSON = {
+                                "petId": data[i].pet_id,
+                                "microchip": data[i].microchip,
+                                "name": data[i].name,
+                                "species": data[i].species,
+                                "race": data[i].race,
+                                "size": data[i].size,
+                                "sex": data[i].sex,
+                                "picture": newImg,
+                                "ownerId": data[i].ownerId
+                            }
+                            fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/pets/pet/picture", {
+                                method: "PUT",
+                                body: JSON.stringify(newPetJSON), // enviar el JSON para la API
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }).then(data =>{
+                                alert("Presione el Boton 'Actualizar' para realizar los Cambios")
+                                document.getElementById("actualizarImgPet").disabled = false;
+                            })
+                        }
+                    }
+                })
+    }
+}
+
 document.getElementById("message-button").onclick = function (){
     var path = window.location.pathname.split("/");
     var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "message.html";
     window.location.href = redirect;
+}
+
+document.getElementById("savePetCase").onclick = function () {
+    let caseId = document.getElementById("caseId").value
+    let createdAt = document.getElementById("fechaCracionCaso").value
+    let typeCase = document.getElementById("tipoDeCaso").value
+    let descriptionCase = document.getElementById("descripcionCaso").value
+    let petId = document.getElementById("idMascotaCaso").value
+    let petCaseJSON={
+        "caseId":caseId,
+        "createdAt":createdAt,
+        "type":typeCase,
+        "description":descriptionCase,
+        "petId":petId
+    }
+    if (caseId === "" || createdAt === "" || typeCase === "" || descriptionCase === "" || petId === ""){
+        let elementP = document.getElementById("MensajeErrorCase").innerHTML = "Debe ingresar datos del Usuario para registrarlo" ;
+    }else{
+        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petcase",{
+            method:"POST",
+            body: JSON.stringify(petCaseJSON), // enviar el JSON para la API
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(data =>{
+            alert("Se creo el Caso de su Mascota")
+        })
+        let elementP = document.getElementById("MensajeError");
+        elementP.innerHTML = "";
+    }
+}
+
+document.getElementById("verHistoriaC").onclick = function (){
+    var rowId = 0;
+    var table
+    let tableTr
+    let tdVisitId
+    let tdCreatedAt
+    let tdType
+    let tdDescription
+    let tdPetId
+    let tdVetId
+    let namePet = document.getElementById("namePet").value
+    let cookies = document.cookie.split(";")
+    let cookieId
+    for (let i = 0; i < cookies.length; i++){
+        if (cookies[i].length == 5 || cookies[i].length == 4){
+            cookieId = cookies[i].split("=")
+        }
+    }
+    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/petsList")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            for (let k = 0; k < data.length; k++) {
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/visitsList")
+                        .then(response => response.json())
+                        .then(datos => {
+                            console.log(datos)
+                            for (let i = 0; i < datos.length; i++) {
+                                if (datos[i].petId === +namePet && data[k].ownerId === +cookieId[1]) {
+                                    table = document.getElementById("tableVisits");
+                                    tableTr = document.createElement("tr");
+                                    tableTr.setAttribute("id", "row" + rowId);
+                                    tdVisitId = document.createElement("td")
+                                    tdCreatedAt = document.createElement("td")
+                                    tdType = document.createElement("td")
+                                    tdDescription = document.createElement("td")
+                                    tdPetId = document.createElement("td")
+                                    tdVetId = document.createElement("td")
+                                    tdVisitId.innerHTML = datos[i].visitId;
+                                    tdCreatedAt.innerHTML = datos[i].createdAt;
+                                    tdType.innerHTML = datos[i].type;
+                                    tdDescription.innerHTML = datos[i].description;
+                                    tdPetId.innerHTML = datos[i].petId;
+                                    tdVetId.innerHTML = datos[i].vetId;
+                                    tableTr.appendChild(tdVisitId)
+                                    tableTr.appendChild(tdCreatedAt)
+                                    tableTr.appendChild(tdType)
+                                    tableTr.appendChild(tdDescription)
+                                    tableTr.appendChild(tdPetId)
+                                    tableTr.appendChild(tdVetId)
+                                    table.appendChild(tableTr)
+                                }else{
+                                    continue
+                                }
+                            }
+                        })
+
+            }
+        })
 }

@@ -16,8 +16,9 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/chat/{username}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
+@ServerEndpoint(value = "/chat/{username}", decoders = co.edu.unbosque.webSocketsChat.MessageDecoder.class, encoders = co.edu.unbosque.webSocketsChat.MessageEncoder.class)
 public class ChatEndpoint {
+
     private Session session;
     private static final Set<ChatEndpoint> chatEndpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();

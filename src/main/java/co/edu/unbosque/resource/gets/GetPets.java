@@ -19,4 +19,12 @@ public class GetPets {
         Optional persistedPet = Optional.of(new PetService().findAll());
         return Response.ok(persistedPet.get()).build();
     }
+
+    @GET
+    @Path("{petId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPetId(@PathParam("petId") Integer petId){
+        Optional persistedOwner = Optional.of(new PetService().findPetId(petId));
+        return Response.ok(persistedOwner.get()).build();
+    }
 }
