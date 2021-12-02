@@ -5,6 +5,35 @@ let officialJSON = {
     "name":"Admin",
     "personId": 1
 }
+let cokies = document.cookie.split(";")
+console.log(cokies)
+if (document.cookie.length != 0){
+    let cookieRedirect
+    for (let i = 0; i < cokies.length; i++){
+        let tamano = cokies[i].indexOf("=")
+        console.log("Tamaño "+tamano)
+        if (tamano === 5){
+           cookieRedirect = cokies[i].split("=")
+        }
+    }
+    console.log("Redireccion "+cookieRedirect)
+    if (cookieRedirect[1] === "owner"){
+        alert("Seras redirigido a tu cuenta porque NO CERRASTE SESIÓN la ultima vez que te fuiste")
+        var path = window.location.pathname.split("/");
+        var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "owner.html";
+        window.location.href = redirect;
+    }else if (cookieRedirect[1] === "VET"){
+        alert("Seras redirigido a tu cuenta porque NO CERRASTE SESIÓN la ultima vez que te fuiste")
+        var path = window.location.pathname.split("/");
+        var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "vet.html";
+        window.location.href = redirect;
+    }else if (cookieRedirect[1] === "official"){
+        alert("Seras redirigido a tu cuenta porque NO CERRASTE SESIÓN la ultima vez que te fuiste")
+        var path = window.location.pathname.split("/");
+        var redirect = window.location.protocol + "//" + window.location.host + "/" + path[1] + "/" + "official.html";
+        window.location.href = redirect;
+    }
+}
 
 fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/officials",{
     method:"POST",

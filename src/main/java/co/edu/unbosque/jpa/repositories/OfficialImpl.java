@@ -63,6 +63,37 @@ public class OfficialImpl implements OfficialRepository{
     }
 
     @Override
+    public Optional<Official> updatePassword(String newPassword, String userName) {
+        try{
+            entityManager.getTransaction().begin();
+            Official official = entityManager.find(Official.class, userName);
+            official.setPassword(newPassword);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(official);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Official> updatePasswordEmail(String newPassword, String newEmail, String userName) {
+        try{
+            entityManager.getTransaction().begin();
+            Official official = entityManager.find(Official.class, userName);
+            official.setPassword(newPassword);
+            official.setEmail(newEmail);
+            entityManager.getTransaction().commit();
+
+            return Optional.of(official);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Official> findByOwnerId(String officialId) {
         Official of = entityManager.createQuery("SELECT o FROM Official o WHERE o.username = :officialId", Official.class)
                 .setParameter("officialId", officialId).getSingleResult();

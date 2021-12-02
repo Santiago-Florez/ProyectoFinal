@@ -144,4 +144,67 @@ public class OwnerService {
                 owner.getNeighborhood());
         return ownerPOJO;
     }
+
+    public OwnerPOJO updatePassword(String newPassword, String userName){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerImpl(entityManager);
+        ownerRepository.updatePassword(newPassword, userName);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Owner owner = findUsername(userName);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPersonId(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
+        return ownerPOJO;
+    }
+
+    public OwnerPOJO updateEmailPassword(String newEmail, String newPassword, String userName){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerImpl(entityManager);
+        ownerRepository.updatePasswordEmail(newPassword, newEmail, userName);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Owner owner = findUsername(userName);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPersonId(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
+        return ownerPOJO;
+    }
+
+    public OwnerPOJO updateAddressNeighnorhood(String address, String neighborhood, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        ownerRepository = new OwnerImpl(entityManager);
+        ownerRepository.updateAddressAndNeighborhood(address,neighborhood,username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Owner owner = findUsername(username);
+        OwnerPOJO ownerPOJO = new OwnerPOJO(owner.getUsername(),
+                owner.getPassword(),
+                owner.getEmail(),
+                owner.getPersonId(),
+                owner.getName(),
+                owner.getAddress(),
+                owner.getNeighborhood());
+        return ownerPOJO;
+    }
 }

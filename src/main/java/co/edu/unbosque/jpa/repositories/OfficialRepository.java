@@ -17,6 +17,10 @@ public interface OfficialRepository {
 
     Optional<Official> updateEmail(String email, String username);
 
+    Optional<Official> updatePassword(String newPassword, String userName);
+
+    Optional<Official> updatePasswordEmail(String newPassword, String newEmail, String userName);
+
     List<Owner> findOwnerLocalidad();
 
     List<Pet> findPetBySpecies();

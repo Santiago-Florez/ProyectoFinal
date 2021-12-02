@@ -36,9 +36,7 @@ public class OwnerResource {
     public Response modify(@PathParam("owner") String owner, @PathParam("update") String update, OwnerPOJO ownerPOJO){
         Optional<OwnerPOJO> persistedOwner = null;
 
-        if(owner.equals("owner") && update.equals("name")){
-            persistedOwner = Optional.of(new OwnerService().updateName(ownerPOJO.getName(), ownerPOJO.getUsername()));
-        }else if (owner.equals("owner") && update.equals("email")){
+        if (owner.equals("owner") && update.equals("email")){
             persistedOwner = Optional.of(new OwnerService().updateEmail(ownerPOJO.getEmail(), ownerPOJO.getUsername()));
         }else if (owner.equals("owner") && update.equals("address")){
             persistedOwner = Optional.of(new OwnerService().updateAddress(ownerPOJO.getAddress(), ownerPOJO.getUsername()));
@@ -53,4 +51,5 @@ public class OwnerResource {
             return Response.status(400).build();
         }
     }
+
 }

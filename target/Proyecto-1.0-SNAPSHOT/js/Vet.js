@@ -135,6 +135,7 @@ document.getElementById("volver-button").onclick = function (){
         var cookie = cookies[i];
         var eqPos = cookie.indexOf("=");
         var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
     var ruta = window.location.pathname.split("/");
     var ir = window.location.protocol + "//" + window.location.host + "/" + ruta[1] + "/" + "index.html";
@@ -274,7 +275,7 @@ document.getElementById("edit-button").onclick = function (){
         var cookies = document.cookie.split("; ")
         console.log(cookies)
         var cookieusername
-        cookieusername = cookies[1].split("=")
+        cookieusername = cookies[0].split("=")
         console.log(cookieusername)
         if (newAddress === "" && newNeighborhood === ""){
             modal.className ="modal fade";
@@ -352,7 +353,7 @@ document.getElementById("edit-button").onclick = function (){
                             "address": address,
                             "neighborhood": localidad
                         };
-                        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/vet/address/neighborhood", {
+                        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/updatesVetEP/vet/address/neighborhood", {
                             method: "PUT",
                             body: JSON.stringify(vetJSON), // enviar el JSON para la API
                             headers: {
@@ -365,6 +366,97 @@ document.getElementById("edit-button").onclick = function (){
                     }
                 })
         }
+    }
+}
+
+document.getElementById("editemail_password-button").onclick = function (){
+    let modal = document.getElementById("email_password");
+    modal.className ="modal fade show";
+    var cookies = document.cookie.split("; ")
+    console.log(cookies)
+    var cookieusername
+    cookieusername = cookies[0].split("=")
+    document.getElementById("editEmailPassWord").onclick = function () {
+        let newEmail = document.getElementById("newEmail").value
+        let newPasswors = document.getElementById("newPassword").value
+        if (newEmail === "" && newPasswors === "") {
+            modal.className = "modal fade";
+        } else if (newEmail !== "" && newPasswors === ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let email = document.getElementById("newEmail").value
+                    let vetJSON = {
+                        "username": data.username,
+                        "password": data.password,
+                        "email": email,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/updatesVetEP/vet/email", {
+                        method: "PUT",
+                        body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo el Email")
+                        })
+                })
+        }else if (newEmail === "" && newPasswors !== ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let password = document.getElementById("newPassword").value
+                    let vetJSON = {
+                        "username": data.username,
+                        "password": password,
+                        "email": data.email,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/updatesVetEP/vet/password", {
+                        method: "PUT",
+                        body: JSON.stringify(vetJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo la Contraseña")
+                        })
+                })
+        }else if (newEmail !== "" && newPasswors !== ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/vets/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let email = document.getElementById("newEmail").value
+                    let password = document.getElementById("newPassword").value
+                    let ownerJSON = {
+                        "username": data.username,
+                        "email": email,
+                        "password": password,
+                        "personId": data.personId,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/passwords/vet/email/password", {
+                        method: "PUT",
+                        body: JSON.stringify(ownerJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo el Email y la Contraseña")
+                        })
+                })
+        }
+
     }
 }
 

@@ -45,11 +45,13 @@ document.getElementById("petsave-button").onclick = function(){
 }
 
 document.getElementById("back-button").onclick = function (){
+
     var cookies = document.cookie.split(";")
     for (var i = 0; i < cookies.length; i++){
         var cookie = cookies[i];
         var eqPos = cookie.indexOf("=");
         var name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
 
     var path = window.location.pathname.split("/");
@@ -115,6 +117,99 @@ document.getElementById("show-button").onclick = function (){
         })
 }
 
+document.getElementById("editemail_password-button").onclick = function (){
+    let modal = document.getElementById("email_password");
+    modal.className ="modal fade show";
+    var cookies = document.cookie.split("; ")
+    console.log(cookies)
+    var cookieusername
+    cookieusername = cookies[0].split("=")
+    document.getElementById("editEmailPassWord").onclick = function () {
+        let newEmail = document.getElementById("newEmail").value
+        let newPasswors = document.getElementById("newPassword").value
+        if (newEmail === "" && newPasswors === "") {
+            modal.className = "modal fade";
+        } else if (newEmail !== "" && newPasswors === ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let email = document.getElementById("newEmail").value
+                    let ownerJSON = {
+                        "username": data.username,
+                        "email": email,
+                        "password": data.password,
+                        "personId": data.personId,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/passwords/owner/email/password", {
+                        method: "PUT",
+                        body: JSON.stringify(ownerJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo el Email")
+                        })
+                })
+        }else if (newEmail === "" && newPasswors !== ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let password = document.getElementById("newPassword").value
+                    let ownerJSON = {
+                        "username": data.username,
+                        "email": data.email,
+                        "password": password,
+                        "personId": data.personId,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/passwords/password", {
+                        method: "PUT",
+                        body: JSON.stringify(ownerJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo la Contraseña")
+                        })
+                })
+        }else if (newEmail !== "" && newPasswors !== ""){
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/" + cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let email = document.getElementById("newEmail").value
+                    let password = document.getElementById("newPassword").value
+                    let ownerJSON = {
+                        "username": data.username,
+                        "email": email,
+                        "password": password,
+                        "personId": data.personId,
+                        "name": data.name,
+                        "address": data.address,
+                        "neighborhood": data.neighborhood
+                    }
+                    fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/passwords/owner/email/password", {
+                        method: "PUT",
+                        body: JSON.stringify(ownerJSON), // enviar el JSON para la API
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(data => {
+                            alert("Se actualizo el Email y la Contraseña")
+                        })
+                })
+        }
+
+    }
+}
+
 document.getElementById("edit-button").onclick = function (){
     let modal = document.getElementById("myModal");
     modal.className ="modal fade show";
@@ -175,7 +270,38 @@ document.getElementById("edit-button").onclick = function (){
                             "address": data.address,
                             "neighborhood": localidad
                         };
-                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/owners/owner/neighborhood",{
+                        fetch("http://localhost:8080/Taller5-1.0-SNAPSHOT/api/owners/owner/password",{
+                            method:"PUT",
+                            body: JSON.stringify(ownerJSON), // enviar el JSON para la API
+                            headers:{
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(data =>{
+                                alert("Se actualizo la Dirección")
+                            })
+                    }
+                })
+        }else if (newAddress !== "" && newNeighborhood !== ""){
+            var passwordConfirm = prompt("Escriba su contraseña para Confirmar la Actualización")
+            fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/owners/"+cookieusername[1])
+                .then(response => response.json())
+                .then(data => {
+                    let username = cookieusername[1];
+                    let password = passwordConfirm;
+                    let localidad = document.getElementById("newlocalidadOwner").value;
+                    let address = document.getElementById("newaddressOwner").value;
+                    if (data.password === password){
+                        let ownerJSON = {
+                            "username": username,
+                            "email": data.email,
+                            "password": password,
+                            "personId":data.personId,
+                            "name": data.name,
+                            "address": address,
+                            "neighborhood": localidad
+                        };
+                        fetch("http://localhost:8080/Proyecto-1.0-SNAPSHOT/api/passwords/owner/address/neighborhood",{
                             method:"PUT",
                             body: JSON.stringify(ownerJSON), // enviar el JSON para la API
                             headers:{
@@ -341,3 +467,4 @@ document.getElementById("verHistoriaC").onclick = function (){
             }
         })
 }
+

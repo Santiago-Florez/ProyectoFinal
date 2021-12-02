@@ -136,4 +136,67 @@ public class VetService {
 
         return vetPOJO;
     }
+
+    public VetPOJO updateEmail(String email, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetImpl(entityManager);
+        vetRepository.updateEmail(email,username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Vet vet = findUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername(),
+                vet.getPassword(),
+                vet.getEmail(),
+                vet.getName(),
+                vet.getAddress(),
+                vet.getNeighborhood());
+
+        return vetPOJO;
+    }
+
+    public VetPOJO updatePassword(String password, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetImpl(entityManager);
+        vetRepository.updatePassword(password,username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Vet vet = findUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername(),
+                vet.getPassword(),
+                vet.getEmail(),
+                vet.getName(),
+                vet.getAddress(),
+                vet.getNeighborhood());
+
+        return vetPOJO;
+    }
+
+    public VetPOJO updateEmailAndPassword(String password, String email, String username){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("proyecto");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        vetRepository = new VetImpl(entityManager);
+        vetRepository.updatePasswordEmail(password,email,username);
+
+        entityManager.close();
+        entityManagerFactory.close();
+
+        Vet vet = findUsername(username);
+        VetPOJO vetPOJO = new VetPOJO(vet.getUsername(),
+                vet.getPassword(),
+                vet.getEmail(),
+                vet.getName(),
+                vet.getAddress(),
+                vet.getNeighborhood());
+
+        return vetPOJO;
+    }
 }

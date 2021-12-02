@@ -71,6 +71,50 @@ public class OwnerImpl implements OwnerRepository {
     }
 
     @Override
+    public Optional<Owner> updatePassword(String newPassword, String userName) {
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, userName);
+            owner.setPassword(newPassword);
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> updatePasswordEmail(String newPassword, String newEmail, String userName) {
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, userName);
+            owner.setPassword(newPassword);
+            owner.setEmail(newEmail);
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Owner> updateAddressAndNeighborhood(String address, String neighborhood, String username) {
+        try{
+            entityManager.getTransaction().begin();
+            Owner owner = entityManager.find(Owner.class, username);
+            owner.setAddress(address);
+            owner.setNeighborhood(neighborhood);
+            entityManager.getTransaction().commit();
+            return Optional.of(owner);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Owner> updateAddress(String address, String username) {
         try{
             entityManager.getTransaction().begin();

@@ -52,26 +52,4 @@ public class VetResource {
             return Response.status(400).build();
         }
     }
-
-    @PUT
-    @Path("/{vet}/{update}/{update2}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response modify(@PathParam("vet") String vet, @PathParam("update") String update, @PathParam("update2") String update2, VetPOJO vetPOJO){
-        Optional<VetPOJO> persistedVet = null;
-
-        if (vet.equals("vet") && update.equals("address") && update2.equals("neighborhood")){
-            persistedVet = Optional.of(new VetService().updateAddressAndNeighborhood(vetPOJO.getAddress(), vetPOJO.getNeighborhood(), vetPOJO.getUsername()));
-        }else{
-            persistedVet = null;
-        }
-        if (persistedVet.isPresent()){
-            return Response.status(Response.Status.CREATED).build();
-        }else{
-            return Response.status(400).build();
-        }
-    }
-
-
-
 }
